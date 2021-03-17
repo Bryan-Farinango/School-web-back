@@ -27,6 +27,16 @@ class Cliente extends Eloquent implements AuthenticatableContract, CanResetPassw
     protected $collection = 'clientes';
 
 
+
+
+
+
+
+
+
+
+
+
     protected $fillable = [
         'nombre_identificacion',
         'nombre_comercial',
