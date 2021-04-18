@@ -1,0 +1,14 @@
+.idea/
+.idea/*
+.idea/workspace.xml
+src/.env
+src/.env.testing
+src/tmp/
+src/vendor/
+src/storage/*
+src/.phpunit.result.cache
+src/composer.lock
+vendor/
+src/bootstrap/autoload.php
+src/node_modules/
+src/package-lock.json

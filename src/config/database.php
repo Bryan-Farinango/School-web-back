@@ -37,16 +37,16 @@ return [
 
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env('DB_HOST', 'localhost'),
+            'host'     => env('DB_HOST', '157.245.116.195'),
             'port'     => env('DB_PORT', 27018),
             'database' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
             'options'  => [
-                'database' => 'admin' // sets the authentication database required by mongo 3
+                'database' => 'school-web-back' // sets the authentication database required by mongo 3
             ]
         ],
-        
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),

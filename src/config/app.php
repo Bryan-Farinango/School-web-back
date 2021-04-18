@@ -55,6 +55,7 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
+    'api_key_admin' => env('API_KEY_ADMIN', '3ac03c93-ddb3-4fe0-84e3-92b14c3e5bd9'),
 
     /*
     |--------------------------------------------------------------------------

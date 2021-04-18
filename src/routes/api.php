@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('emitir_simple', 'doc_electronicos\ApiController@EmitirSimple');
+
+Route::post('registro', 'ApiRegisterController@userRegister');
 
 // Route::post('emitir_simple',  function (Request $request){
 //     return json_encode(array("result" => "si"));
