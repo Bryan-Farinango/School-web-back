@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('registro', 'ApiRegisterController@userRegister');
-
+Route::post('registro-test','ApiTestController@apiTest');
 // Route::post('emitir_simple',  function (Request $request){
 //     return json_encode(array("result" => "si"));
 // });
