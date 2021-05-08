@@ -21,8 +21,6 @@ class ApiSubjectsController extends Controller
         $nombre_asignatura = $request->input('nombre_asignatura');
         $anio_escolar = $request->input('anio_escolar');
         $activo = $request->input('activo');
-
-
         //validaciones
 
         if (empty($nombre_asignatura)){
@@ -39,7 +37,7 @@ class ApiSubjectsController extends Controller
                 [
 
                     'resultado' => false,
-                    'mensaje' => 'año escolar requerido'
+                    'mensaje' => 'año escolar requerido.'
                 ]
             );
         }
@@ -48,7 +46,7 @@ class ApiSubjectsController extends Controller
                 [
 
                     'resultado' => false,
-                    'mensaje' => 'activo false'
+                    'mensaje' => 'Estado necesario.'
                 ]
             );
         }
@@ -64,7 +62,7 @@ class ApiSubjectsController extends Controller
         return response()->json(
             [
                 'resultado' => true,
-                'objeto' => 'asignatura creada con exito '
+                'objeto' => 'asignatura creada con exito.'
             ]
         );
     }

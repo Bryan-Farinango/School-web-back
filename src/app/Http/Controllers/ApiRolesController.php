@@ -37,7 +37,7 @@ class ApiRolesController extends Controller
                 [
 
                     'resultado' => false,
-                    'mensaje' => 'activo false'
+                    'mensaje' => 'Estado necesario.'
                 ]
             );
         }
@@ -52,7 +52,7 @@ class ApiRolesController extends Controller
         return response()->json(
             [
                 'resultado' => true,
-                'objeto' => 'rol creado con exito '
+                'objeto' => 'rol creado con exito.'
             ]
         );
     }
