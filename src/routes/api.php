@@ -15,8 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('registro', 'ApiRegisterController@userRegister');
+Route::post('transportista', 'ApiRegisterController@transportistaRegister');
 Route::post('roles', 'ApiRolesController@userRol');
 Route::post('asignaturas', 'ApiSubjectsController@subjects');
+Route::post('publicaciones', 'ApiPublicationsController@publications');
+Route::post('grados', 'ApiAdminController@schoolGrade');
+Route::post('get-grados', 'ApiAdminController@getGrades');
+Route::post('rutas', 'ApiAdminController@ruta');
+
 
 // Route::post('emitir_simple',  function (Request $request){
 //     return json_encode(array("result" => "si"));
