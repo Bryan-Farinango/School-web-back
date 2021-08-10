@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Grade;
 use App\Models\Roles;
 use App\Models\Subject;
 use App\Modulo;
@@ -19,12 +20,11 @@ class ApiSubjectsController extends Controller
     public function subjects (Request $request)
     {
         $nombre_asignatura = $request->input('nombre_asignatura');
-        $anio_escolar = $request->input('anio_escolar');
-        $activo = $request->input('activo');
-
+        $descripcion = $request->input('descripcion');
+        $anio_escolar = (int)$request->input('anio_escolar');
+        $grado = $request->input('grado');
 
         //validaciones
-
         if (empty($nombre_asignatura)){
             return response()-> json(
                 [
@@ -43,28 +43,66 @@ class ApiSubjectsController extends Controller
                 ]
             );
         }
-        if (empty($activo)){
+        if (empty($descripcion)){
             return response()-> json(
                 [
 
                     'resultado' => false,
-                    'mensaje' => 'activo false'
+                    'mensaje' => 'descripcion requerida'
+                ]
+            );
+        }
+        if (empty($grado)){
+            return response()-> json(
+                [
+
+                    'resultado' => false,
+                    'mensaje' => 'grado requerido'
+                ]
+            );
+        }
+
+        $grado_id = Grade::where('nombre_grado', $grado)
+            ->orderBy("created_at", "desc")
+            ->first();
+
+        if (empty($grado_id)){
+            return response()-> json(
+                [
+
+                    'resultado' => false,
+                    'mensaje' => 'El grado no existe'
                 ]
             );
         }
 
         $asignaturas = [
             'nombre_asignatura' => $nombre_asignatura,
+            'descripcion' => $descripcion,
             'anio_escolar' => $anio_escolar,
-            'activo' => $activo
-        ];
+            'grado_id' => $grado_id->_id
 
-        $cuenta = Subject:: create ($asignaturas);
+        ];
+        $materiaValidacion = Subject::where('nombre_asignatura', $nombre_asignatura)
+            ->orderBy("created_at", "desc")
+            ->first();
+
+        if ($materiaValidacion != null) {
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => "La Materia ya existe."
+                ]
+            );
+        }
+
+
+        $subject = Subject::create($asignaturas);
 
         return response()->json(
             [
                 'resultado' => true,
-                'objeto' => 'asignatura creada con exito '
+                'mensaje' => 'asignatura creada con exito'
             ]
         );
     }

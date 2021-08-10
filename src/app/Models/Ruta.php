@@ -7,6 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 use Carbon\Carbon;
 use MongoDB\BSON\UTCDateTime;
 use DateTime;
+
 use Illuminate\Support\Facades\Config;
 
 use Exception;
@@ -16,18 +17,21 @@ use Illuminate\Support\Facades\Storage;
 use mikehaertl\pdftk\Pdf as PdftkPdf;
 
 
-class Subject extends Model
+class Ruta extends Model
 {
     use HasFactory;
 
-    protected $collection = 'asignaturas';
+    protected $collection = 'rutas';
 
     protected $fillable = [
-    '_id',
-    'nombre_asignatura',
-    'descripcion',
-    'anio_escolar',
-    'grado_id'
+        'titulo_ruta',
+        'numero_ruta',
+        'ciudad',
+        'sector_1',
+        'sector_2',
+        'sector_3'
     ];
+
+
 
 }

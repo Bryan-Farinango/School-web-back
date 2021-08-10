@@ -7,6 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 use Carbon\Carbon;
 use MongoDB\BSON\UTCDateTime;
 use DateTime;
+
 use Illuminate\Support\Facades\Config;
 
 use Exception;
@@ -16,18 +17,19 @@ use Illuminate\Support\Facades\Storage;
 use mikehaertl\pdftk\Pdf as PdftkPdf;
 
 
-class Subject extends Model
+class Grade extends Model
 {
     use HasFactory;
 
-    protected $collection = 'asignaturas';
+    protected $collection = 'grados';
 
     protected $fillable = [
-    '_id',
-    'nombre_asignatura',
-    'descripcion',
-    'anio_escolar',
-    'grado_id'
+        'nombre_grado',
+        'jornada',
+        'descripcion',
+        'rango_edad'
     ];
+
+
 
 }
