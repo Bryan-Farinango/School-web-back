@@ -30,7 +30,9 @@ class Usuario extends Model
         'apellidos',
         'rol',
         'password',
-        'telefono'
+        'telefono',
+        'temporal_password',
+        'origen'
     ];
 
 }

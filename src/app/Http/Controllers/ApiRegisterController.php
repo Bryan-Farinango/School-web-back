@@ -26,6 +26,8 @@ class ApiRegisterController extends Controller
         $telefono = $request->input('telefono');
         $password = $request->input('password');
         $api_key_admin = $request->input('api_key_admin');
+        $createdBy = $request->input('origen');
+        $temporal_password = $request->input('temporal_password');
 
         //validaciones
 
@@ -109,6 +111,18 @@ class ApiRegisterController extends Controller
             'password' => Hash::make($password),
             'telefono' => $telefono
         ];
+
+        if (!empty($temporal_password)){
+            $usuarios += [
+                'temporal_password' => $temporal_password
+            ];
+        }
+
+        if (!empty($createdBy)){
+            $usuarios += [
+                'origen' => $createdBy
+            ];
+        }
 
         $userValidation = Usuario::where('email', $email)
             ->orderBy("created_at", "desc")
