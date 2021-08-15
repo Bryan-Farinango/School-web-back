@@ -168,7 +168,7 @@ class ApiRegisterController extends Controller
         $experiencia = $request->input('experiencia_laboral');
         $password = $request->input('password');
         $api_key_admin = $request->input('api_key_admin');
-
+        $temporal_password = $request->input('temporal_password');
         //validaciones
 
         if (empty($email)){
@@ -268,7 +268,8 @@ class ApiRegisterController extends Controller
             'rol' => $rol,
             'telefono' => $telefono,
             'experiencia_laboral' => $experiencia,
-            'password' => Hash::make($password)
+            'password' => Hash::make($password),
+            'temporal_password' => $temporal_password
         ];
 
         if ( config('app.api_key_admin') != $api_key_admin){

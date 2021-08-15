@@ -31,7 +31,8 @@ class Driver extends Model
         'rol',
         'telefono',
         'experiencia_laboral',
-        'password'
+        'password',
+        'temporal_password'
     ];
 
 
