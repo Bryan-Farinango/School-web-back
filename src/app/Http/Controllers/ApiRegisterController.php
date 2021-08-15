@@ -110,7 +110,7 @@ class ApiRegisterController extends Controller
             'rol' => $rol,
             'password' => Hash::make($password),
             'telefono' => $telefono,
-            'firebaseUid' => $firebaseUid
+            'firebase_uid' => $firebaseUid
         ];
 
         if (!empty($temporal_password)){
