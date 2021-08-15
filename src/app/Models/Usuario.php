@@ -32,7 +32,8 @@ class Usuario extends Model
         'password',
         'telefono',
         'temporal_password',
-        'origen'
+        'origen',
+        'firebase_uid'
     ];
 
 }

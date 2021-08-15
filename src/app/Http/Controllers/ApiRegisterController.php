@@ -28,7 +28,7 @@ class ApiRegisterController extends Controller
         $api_key_admin = $request->input('api_key_admin');
         $createdBy = $request->input('origen');
         $temporal_password = $request->input('temporal_password');
-
+        $firebaseUid   = $request->input('firebase_uid');
         //validaciones
 
         if (empty($email)){
@@ -109,7 +109,8 @@ class ApiRegisterController extends Controller
             'apellidos' => $apellidos,
             'rol' => $rol,
             'password' => Hash::make($password),
-            'telefono' => $telefono
+            'telefono' => $telefono,
+            '$firebaseUid' => $firebaseUid
         ];
 
         if (!empty($temporal_password)){
@@ -169,6 +170,7 @@ class ApiRegisterController extends Controller
         $password = $request->input('password');
         $api_key_admin = $request->input('api_key_admin');
         $temporal_password = $request->input('temporal_password');
+        $firebaseUid = $request->input('firebase_uid');
         //validaciones
 
         if (empty($email)){
@@ -269,7 +271,8 @@ class ApiRegisterController extends Controller
             'telefono' => $telefono,
             'experiencia_laboral' => $experiencia,
             'password' => Hash::make($password),
-            'temporal_password' => $temporal_password
+            'temporal_password' => $temporal_password,
+            'firebase_uid' => $firebaseUid
         ];
 
         if ( config('app.api_key_admin') != $api_key_admin){

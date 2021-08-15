@@ -32,7 +32,8 @@ class Driver extends Model
         'telefono',
         'experiencia_laboral',
         'password',
-        'temporal_password'
+        'temporal_password',
+        'firebase_uid'
     ];
 
 
