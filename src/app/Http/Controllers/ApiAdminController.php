@@ -231,4 +231,39 @@ class ApiAdminController extends Controller
 
     }
 
+    public function getRutas(Request $request){
+        $apiKey = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $rutas =  Ruta::all();
+        $getRutas = array();
+        foreach ($rutas as $r){
+            $rutasArray = array(
+                'titulo_ruta' => $r['titulo_ruta'],
+                'numero_ruta' => $r['numero_ruta'],
+                'ciudad' => $r['ciudad'],
+                'sector_1' => $r['sector_1'],
+                'sector_2' => $r['sector_2'],
+                'sector_3' => $r['sector_3'],
+            );
+            array_push($getRutas, $rutasArray);
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'rutas' => $getRutas
+            ]
+        );
+
+    }
+
 }

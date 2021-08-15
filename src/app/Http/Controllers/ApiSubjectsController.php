@@ -6,6 +6,7 @@ use App\Cliente;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Grade;
 use App\Models\Roles;
+use App\Models\Ruta;
 use App\Models\Subject;
 use App\Modulo;
 use App\Poliza\Aseguradora;
@@ -105,5 +106,42 @@ class ApiSubjectsController extends Controller
                 'mensaje' => 'asignatura creada con exito'
             ]
         );
+    }
+    public function getSubjects(Request $request){
+        $apiKey = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $materias =  Subject::all();
+        $getMaterias = array();
+        foreach ($materias as $r){
+            $gradeName = Grade::where('_id', $r['grado_id'])
+                ->orderBy("created_at", "desc")
+                ->first();
+            $materiasArray = array(
+                'nombre_asignatura' => $r['nombre_asignatura'],
+                'descripcion' => $r['descripcion'],
+                'anio_escolar' => $r['anio_escolar'],
+                'Grado' => $gradeName['nombre_grado'],
+            );
+            array_push($getMaterias, $materiasArray);
+        }
+
+
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'asignaturas' => $getMaterias
+            ]
+        );
+
     }
 }

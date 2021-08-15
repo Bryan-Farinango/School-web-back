@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Enums\AccionProcesoEnum;
 use App\Models\Enums\EstadoFirmaEnum;
+use App\Models\Ruta;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Proceso;
@@ -157,7 +158,40 @@ class ApiRegisterController extends Controller
             ]
         );
     }
+    public function getUsers(Request $request){
+        $apiKey = $request->input('api_key_admin');
 
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $users =  Driver::all();
+        $getUsers = array();
+        foreach ($users as $r){
+            $usersArray = array(
+                'nombres' => $r['nombres'],
+                'apellidos' => $r['apellidos'],
+                'email' => $r['email'],
+                'telefono' => $r['telefono'],
+                'rol' => $r['rol'],
+            );
+            array_push($getUsers, $usersArray);
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'usuarios' => $getUsers
+            ]
+        );
+
+    }
+    //transportistas
     public function transportistaRegister(Request $request)
     {
         $nombres = $request->input('nombres');
@@ -314,6 +348,40 @@ class ApiRegisterController extends Controller
                 'mensaje' => 'Transportista creado correctamente.'
             ]
         );
+    }
+    public function getTransportistas(Request $request){
+        $apiKey = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $drivers =  Driver::all();
+        $getDrivers = array();
+        foreach ($drivers as $r){
+            $driversArray = array(
+                'nombres' => $r['nombres'],
+                'apellidos' => $r['apellidos'],
+                'email' => $r['email'],
+                'capacidad' => $r['capacidad'],
+                'telefono' => $r['telefono'],
+                'experiencia_laboral' => $r['experiencia_laboral'],
+            );
+            array_push($getDrivers, $driversArray);
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'transportistas' => $getDrivers
+            ]
+        );
+
     }
 
 }
