@@ -179,6 +179,7 @@ class ApiRegisterController extends Controller
                 'email' => $r['email'],
                 'telefono' => $r['telefono'],
                 'rol' => $r['rol'],
+                'id' => $r['_id'],
             );
             array_push($getUsers, $usersArray);
         }
