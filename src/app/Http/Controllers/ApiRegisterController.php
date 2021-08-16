@@ -15,6 +15,7 @@ use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use MongoDB\BSON\UTCDateTime;
+use DataTables;
 
 class ApiRegisterController extends Controller
 {
@@ -159,7 +160,16 @@ class ApiRegisterController extends Controller
         );
     }
     public function getUsers(Request $request){
+
+
+        $defaultLengthTake = 10;
+        $validateFormat = false;
+        $errors = array();
         $apiKey = $request->input('api_key_admin');
+        $inputDataFrom = $request->input('desde');
+        $inputDateTo = $request->input('hasta');
+        $dataTableFormat = $request->input('formato_datatable');
+        $dataTableFormat = isset($dataTableFormat) ? (bool)$dataTableFormat : false;
 
         if ( config('app.api_key_admin') != $apiKey){
             return response()->json(
@@ -170,26 +180,56 @@ class ApiRegisterController extends Controller
             );
         }
 
-        $users =  Driver::all();
-        $getUsers = array();
-        foreach ($users as $r){
-            $usersArray = array(
-                'nombres' => $r['nombres'],
-                'apellidos' => $r['apellidos'],
-                'email' => $r['email'],
-                'telefono' => $r['telefono'],
-                'rol' => $r['rol'],
-                'id' => $r['_id'],
-            );
-            array_push($getUsers, $usersArray);
+        if (!isset($inputDataFrom)) {
+            $inputDataFrom = '01/12/2020';
         }
 
+        $usuarios = Usuario::select('nombres', 'apellidos', 'email', 'telefono', 'rol')
+            ->take(3000)
+            ->get();
+
+        $objeto = Datatables::of($usuarios)->addIndexColumn()
+            ->toJson();
+        $objeto = $dataTableFormat ? $objeto : $objeto->original['data'];
         return response()->json(
             [
                 'resultado' => true,
-                'usuarios' => $getUsers
+                'mensaje' => 'Consulta realizada existosamente',
+                'usuarios' => $objeto,
             ]
         );
+
+//        $apiKey = $request->input('api_key_admin');
+//
+//        if ( config('app.api_key_admin') != $apiKey){
+//            return response()->json(
+//                [
+//                    'resultado' => false,
+//                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+//                ]
+//            );
+//        }
+//
+//        $users =  Driver::all();
+//        $getUsers = array();
+//        foreach ($users as $r){
+//            $usersArray = array(
+//                'nombres' => $r['nombres'],
+//                'apellidos' => $r['apellidos'],
+//                'email' => $r['email'],
+//                'telefono' => $r['telefono'],
+//                'rol' => $r['rol'],
+//                'id' => $r['_id'],
+//            );
+//            array_push($getUsers, $usersArray);
+//        }
+//
+//        return response()->json(
+//            [
+//                'resultado' => true,
+//                'usuarios' => $getUsers
+//            ]
+//        );
 
     }
     //transportistas
