@@ -131,6 +131,7 @@ class ApiAdminController extends Controller
 
     }
 
+    //rutas
     public function ruta(Request $request){
         $titulo = $request->input('titulo_ruta');
         $numeroRuta = $request->input('numero_ruta');
@@ -232,7 +233,6 @@ class ApiAdminController extends Controller
 
 
     }
-
     public function getRutas(Request $request){
         $apiKey = $request->input('api_key_admin');
 
@@ -273,6 +273,37 @@ class ApiAdminController extends Controller
             ]
         );
 
+    }
+    public function deleteDriver(Request $request){
+        $apiKey = $request->input('api_key_admin');
+        $transportista_id = $request->input('transportista_id');
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $ruta = Ruta::where('transportista_id', $transportista_id)->get()->first();
+        if ($ruta != null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'El transportista no existe.',
+                ]
+            );
+        }
+
+        $ruta->transportista_id = null;
+        $ruta->save();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Transportista eliminado de la Ruta',
+            ]
+        );
     }
 
 }
