@@ -477,6 +477,7 @@ class ApiRegisterController extends Controller
         $getDrivers = array();
         foreach ($drivers as $r){
             $driversArray = array(
+                'id' => $r['_id'],
                 'nombres' => $r['nombres'],
                 'apellidos' => $r['apellidos'],
                 'email' => $r['email'],
