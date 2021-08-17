@@ -260,7 +260,8 @@ class ApiAdminController extends Controller
                 'sector_3' => $r['sector_3'],
                 'transportista_id' => $r['transportista_id'],
                 'nombre_transportista' => $transportistaName['nombres'],
-                'apellido_transportista' => $transportistaName['apellidos']
+                'apellido_transportista' => $transportistaName['apellidos'],
+                'obj' => $transportistaName
             );
             array_push($getRutas, $rutasArray);
         }
