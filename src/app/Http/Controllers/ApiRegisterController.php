@@ -250,7 +250,7 @@ class ApiRegisterController extends Controller
             );
         }
 
-        $cuenta = Cuenta::where("_id", $cuentaId)->get()->first();
+        $cuenta = Usuario::where("_id", $cuentaId)->get()->first();
 
         if ($cuenta == null) {
             return
