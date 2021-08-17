@@ -238,7 +238,7 @@ class ApiRegisterController extends Controller
         $cuentaId = $request->input('cuenta_id');
         $nombres = $request->input('nombres');
         $apellidos = $request->input('apellidos');
-        $telefono = $request->input('phone');
+        $telefono = $request->input('telefono');
         $rol = $request->input('rol');
 
         if ( config('app.api_key_admin') != $api_key_admin){
