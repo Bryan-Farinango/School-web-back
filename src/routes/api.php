@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('registro', 'ApiRegisterController@userRegister');
 Route::post('get-users', 'ApiRegisterController@getUsers');
 Route::post('update-users', 'ApiRegisterController@updateUsers');
+Route::post('delete-users', 'ApiRegisterController@deleteUsers');
 //transportista
 Route::post('transportista', 'ApiRegisterController@transportistaRegister');
 Route::post('get-transportistas', 'ApiRegisterController@getTransportistas');

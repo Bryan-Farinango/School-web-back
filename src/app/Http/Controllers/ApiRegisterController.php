@@ -273,6 +273,36 @@ class ApiRegisterController extends Controller
             ]
         );
     }
+    public function deleteUsers(Request $request){
+        $api_key_admin = $request->input('api_key_admin');
+        $cuentaId = $request->input('cuenta_id');
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $cuenta = Usuario::find($cuentaId);
+        if ($cuenta == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "Campo 'cuenta_id' no válido."
+                ];
+        }
+
+        $cuenta->delete();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Cuenta Borrada.'
+            ]
+        );
+    }
     //transportistas
     public function transportistaRegister(Request $request)
     {
