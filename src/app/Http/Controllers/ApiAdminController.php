@@ -296,7 +296,7 @@ class ApiAdminController extends Controller
             );
         }
 
-        $ruta->transportista_id = null;
+        $ruta->transportista_id = 'empty';
         $ruta->save();
         return response()->json(
             [
