@@ -29,7 +29,8 @@ class Ruta extends Model
         'ciudad',
         'sector_1',
         'sector_2',
-        'sector_3'
+        'sector_3',
+        'transportista_id'
     ];
 
 
