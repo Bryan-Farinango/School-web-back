@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cuenta;
 use App\Models\Driver;
 use App\Models\Enums\AccionProcesoEnum;
 use App\Models\Enums\EstadoFirmaEnum;
@@ -231,6 +232,46 @@ class ApiRegisterController extends Controller
 //            ]
 //        );
 
+    }
+    public function updateUsers(Request $request){
+        $api_key_admin = $request->input('api_key_admin');
+        $cuentaId = $request->input('cuenta_id');
+        $nombres = $request->input('nombres');
+        $apellidos = $request->input('apellidos');
+        $telefono = $request->input('phone');
+        $rol = $request->input('rol');
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $cuenta = Cuenta::where("_id", $cuentaId)->get()->first();
+
+        if ($cuenta == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "Campo 'cuenta_id' no válido."
+                ];
+        }
+
+        $cuenta->nombres = $nombres;
+        $cuenta->apellidos = $apellidos;
+        $cuenta->telefono = $telefono;
+        $cuenta->rol = $rol;
+        $cuenta->save();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Datos actualizados.',
+            ]
+        );
     }
     //transportistas
     public function transportistaRegister(Request $request)
