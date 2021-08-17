@@ -247,6 +247,7 @@ class ApiAdminController extends Controller
         $getRutas = array();
         foreach ($rutas as $r){
             $rutasArray = array(
+                'ruta_id' => $r['_id'],
                 'titulo_ruta' => $r['titulo_ruta'],
                 'numero_ruta' => $r['numero_ruta'],
                 'ciudad' => $r['ciudad'],
