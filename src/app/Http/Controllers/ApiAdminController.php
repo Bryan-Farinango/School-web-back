@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use App\Models\Enums\AccionProcesoEnum;
 use App\Models\Enums\EstadoFirmaEnum;
 use App\Models\Grade;
@@ -247,6 +248,8 @@ class ApiAdminController extends Controller
         $rutas =  Ruta::all();
         $getRutas = array();
         foreach ($rutas as $r){
+
+            $transportistaName = Driver::where('_id',$r['_id'] )->get()->first();
             $rutasArray = array(
                 'ruta_id' => $r['_id'],
                 'titulo_ruta' => $r['titulo_ruta'],
@@ -255,6 +258,9 @@ class ApiAdminController extends Controller
                 'sector_1' => $r['sector_1'],
                 'sector_2' => $r['sector_2'],
                 'sector_3' => $r['sector_3'],
+                'transportista_id' => $r['transportista_id'],
+                'nombre_transportista' => $transportistaName->nombres,
+                'apellido_transportista' => $transportistaName->apellidos
             );
             array_push($getRutas, $rutasArray);
         }
