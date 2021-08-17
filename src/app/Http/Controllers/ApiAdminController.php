@@ -305,6 +305,30 @@ class ApiAdminController extends Controller
             ]
         );
     }
+    public function addDriver(Request $request){
+        $apiKey = $request->input('api_key_admin');
+        $nombreTransportista = $request->input('nombre_transportista');
+        $ruta_id = $request->input('ruta_id');
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $driveradd = Driver::where('nombres', $nombreTransportista)->get()->first();
+        $ruta = Ruta::find($ruta_id);
+
+        $ruta->transportista_id = $driveradd->_id;
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Transportista añadido correctamente.'
+            ]
+        );
+    }
 
 
 

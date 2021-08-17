@@ -34,6 +34,7 @@ Route::post('get-grados', 'ApiAdminController@getGrades');
 Route::post('rutas', 'ApiAdminController@ruta');
 Route::post('get-rutas', 'ApiAdminController@getRutas');
 Route::post('delete-driver-from-ruta', 'ApiAdminController@deleteDriver');
+Route::post('add-driver-to-ruta', 'ApiAdminController@addDriver');
 
 
 // Route::post('emitir_simple',  function (Request $request){
