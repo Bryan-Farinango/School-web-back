@@ -286,8 +286,8 @@ class ApiAdminController extends Controller
             );
         }
 
-        $ruta = Ruta::where('transportista_id', $transportista_id)->get()->first();
-        if ($ruta != null){
+        $ruta = Ruta::where("transportista_id", $transportista_id)->get()->first();
+        if ($ruta = null){
             return response()->json(
                 [
                     'resultado' => false,
