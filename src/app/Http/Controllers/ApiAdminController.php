@@ -137,7 +137,7 @@ class ApiAdminController extends Controller
         $sector1 = $request->input('sector_1');
         $sector2 = $request->input('sector_2');
         $sector3 = $request->input('sector_3');
-
+        $transportistaId = $request->input('transportista_id');
         if (empty($titulo)){
             return response()->json(
                 [
@@ -194,6 +194,7 @@ class ApiAdminController extends Controller
             'sector_1' => $sector1,
             'sector_2' => $sector2,
             'sector_3' => $sector3,
+            'transportista_id' => $transportistaId
         ];
 
         $rutaValidation = Ruta::where('numero_ruta', $numeroRuta)
