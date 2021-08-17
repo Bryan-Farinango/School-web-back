@@ -325,7 +325,9 @@ class ApiAdminController extends Controller
         return response()->json(
             [
                 'resultado' => true,
-                'mensaje' => 'Transportista añadido correctamente.'
+                'mensaje' => 'Transportista añadido correctamente.',
+                'ruta' => $ruta,
+                'driver' => $driveradd
             ]
         );
     }
