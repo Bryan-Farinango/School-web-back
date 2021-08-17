@@ -322,6 +322,7 @@ class ApiAdminController extends Controller
         $ruta = Ruta::find($ruta_id);
 
         $ruta->transportista_id = $driveradd->_id;
+        $ruta->save();
         return response()->json(
             [
                 'resultado' => true,
