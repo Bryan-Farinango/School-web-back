@@ -145,7 +145,7 @@ class ApiSubjectsController extends Controller
 
 
 
-
+        $historial = array();
 
         foreach ($objeto->original['data'] as $o){
             $gradeName = Grade::where('_id', $o['grado_id'])
@@ -156,7 +156,7 @@ class ApiSubjectsController extends Controller
             );
 
             $merge =  array_merge( $o, $auxArray);
-            array_push($objeto->original['data'], $merge );
+            array_push($historial, $merge );
 
         }
 
@@ -165,6 +165,7 @@ class ApiSubjectsController extends Controller
                 'resultado' => true,
                 'mensaje' => 'Consulta realizada existosamente',
                 'materias' => $objeto,
+                'historial' => $historial
             ]
         );
 
