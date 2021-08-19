@@ -145,9 +145,13 @@ class ApiSubjectsController extends Controller
                 ->addColumn('nombre_grado', $gradeName['nombre_grado'])
                 ->toJson();
 
-            $metadataArray = array(
+//            $metadataArray = array(
+//                "nombres o id" => $r['grado_id']
+//            );
+            $metadataArray = array();
+            $metadataArray += [
                 "nombres o id" => $r['grado_id']
-            );
+            ];
             array_push($historial, $metadataArray );
         }
 
