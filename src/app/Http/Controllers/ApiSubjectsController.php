@@ -134,6 +134,17 @@ class ApiSubjectsController extends Controller
             $inputDataFrom = '01/12/2020';
         }
 
+        $materia = Subject::all();
+
+        if ($materia->grado_id != null ){
+            $grado = Grade::find($materia->grado_id);
+            if ($grado == null){
+                $materia->grado_id = '';
+                $materia->nombre_grado = 'Sin Asignar';
+                $materia->save();
+            }
+        }
+
         $subjects = Subject::select('nombre_asignatura', 'descripcion', 'anio_escolar', 'grado_id', 'nombre_grado')
             ->take(3000)
             ->get();
