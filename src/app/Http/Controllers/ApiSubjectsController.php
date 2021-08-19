@@ -151,10 +151,13 @@ class ApiSubjectsController extends Controller
             $gradeName = Grade::where('_id', $o['grado_id'])
                 ->orderBy("created_at", "desc")
                 ->first();
+            $auxArray = array(
+                "nombre_grado" => $gradeName['nombre_grado']
+            );
 
-            $objeto->original['data'] += [
-                'nombre_grado'=>$gradeName['nombre_grado']
-            ];
+            $merge =  array_merge( $o, $auxArray);
+            array_push($objeto->original['data'], $merge );
+
         }
 
         return response()->json(
