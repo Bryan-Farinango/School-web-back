@@ -165,7 +165,8 @@ class ApiSubjectsController extends Controller
                 'resultado' => true,
                 'mensaje' => 'Consulta realizada existosamente',
                 'materias' => $objeto,
-                "historial" =>$metadataArray
+                "historial" =>$metadataArray,
+                "materias" => $materias
             ]
         );
 
