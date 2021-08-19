@@ -15,6 +15,7 @@ use App\Models\Firma;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rules\In;
 use MongoDB\BSON\UTCDateTime;
 
 class ApiAdminController extends Controller
@@ -277,6 +278,13 @@ class ApiAdminController extends Controller
     public function deleteDriver(Request $request){
         $apiKey = $request->input('api_key_admin');
         $transportista_id = $request->input('transportista_id');
+        $ruta_id = $request->input('ruta_id');
+
+        $dataMatch = [
+            'transportista_id' => $transportista_id,
+            '_id' => $ruta_id
+        ];
+
         if ( config('app.api_key_admin') != $apiKey){
             return response()->json(
                 [
@@ -286,7 +294,7 @@ class ApiAdminController extends Controller
             );
         }
 
-        $ruta = Ruta::where("transportista_id", $transportista_id)->get()->first();
+        $ruta = Ruta::where($dataMatch)->get()->first();
         if ($ruta == null){
             return response()->json(
                 [
