@@ -139,9 +139,7 @@ class ApiSubjectsController extends Controller
 
         $materias =  Subject::all();
         foreach ($materias as $r){
-            $gradeName = Grade::where('_id', $r['grado_id'])
-                ->orderBy("created_at", "desc")
-                ->first();
+            $gradeName = Grade::find($r['grado_id']);
             $objeto = Datatables::of($subjects)->addIndexColumn()
                 ->addColumn('nombre_grado', $gradeName['nombre_grado'])
                 ->toJson();
