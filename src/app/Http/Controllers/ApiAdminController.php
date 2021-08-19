@@ -340,6 +340,51 @@ class ApiAdminController extends Controller
             ]
         );
     }
+    public function updateAllDriver(Request $request){
+        $api_key_admin = $request->input('api_key_admin');
+        $rutaId = $request->input('ruta_id');
+        $titulo = $request->input('titulo_ruta');
+        $numero = $request->input('numero_ruta');
+        $ciudad = $request->input('ciudad');
+        $sector1 = $request->input('sector_1');
+        $sector2 = $request->input('sector_2');
+        $sector3 = $request->input('sector_3');
+
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $rutaObj = Ruta::where("_id", $rutaId)->get()->first();
+
+        if ($rutaObj == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "Campo 'cuenta_id' no válido."
+                ];
+        }
+
+        $rutaObj->titulo_ruta = $titulo;
+        $rutaObj->numero_ruta = $numero;
+        $rutaObj->ciudad = $ciudad;
+        $rutaObj->sector_1 = $sector1;
+        $rutaObj->sector_2 = $sector2;
+        $rutaObj->sector_3 = $sector3;
+        $rutaObj->save();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Ruta actualizada.',
+            ]
+        );
+    }
 
 
 
