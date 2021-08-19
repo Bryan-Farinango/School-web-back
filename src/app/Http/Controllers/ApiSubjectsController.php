@@ -83,7 +83,8 @@ class ApiSubjectsController extends Controller
             'nombre_asignatura' => $nombre_asignatura,
             'descripcion' => $descripcion,
             'anio_escolar' => $anio_escolar,
-            'grado_id' => $grado_id->_id
+            'grado_id' => $grado_id->_id,
+            'nombre_grado' => $grado_id->nombre_grado
 
         ];
         $materiaValidacion = Subject::where('nombre_asignatura', $nombre_asignatura)
@@ -179,8 +180,10 @@ class ApiSubjectsController extends Controller
 
         if ($grado != null ){
             $newGradeID = $grado->_id;
+            $newNombreGrado = $grado->nombre_grado;
         }else{
             $newGradeID = '';
+            $newNombreGrado = '';
         }
 
         $materia = Subject::where("_id", $materiaId)->get()->first();
@@ -197,6 +200,7 @@ class ApiSubjectsController extends Controller
         $materia->descripcion = $descripcion;
         $materia->anio_escolar = $anio;
         $materia->grado_id = $newGradeID;
+        $materia->nombre_grado = $newNombreGrado;
         $materia->save();
 
         return response()->json(

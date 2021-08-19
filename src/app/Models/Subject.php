@@ -27,7 +27,8 @@ class Subject extends Model
     'nombre_asignatura',
     'descripcion',
     'anio_escolar',
-    'grado_id'
+    'grado_id',
+    'nombre_grado'
     ];
 
 }
