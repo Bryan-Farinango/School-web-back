@@ -139,20 +139,23 @@ class ApiSubjectsController extends Controller
 
         $materias =  Subject::all();
         $historial = array();
+        $i = 0;
         foreach ($materias as $r){
+
+            $i = $i + 1;
             $gradeName = Grade::find($r['grado_id']);
             $objeto = Datatables::of($subjects)->addIndexColumn()
-                ->addColumn('nombre_grado', $gradeName['nombre_grado'])
+                ->addColumn('nombre_grado', $gradeName['nombre_grado'], $i)
                 ->toJson();
 
-            return response()->json(
-                [
-                    'resultado' => true,
-                    'id-busqueda' => $r['grado_id'],
-                    'grado-entero' => $gradeName,
-                    'nombre_grado' =>  $gradeName['nombre_grado']
-                ]
-            );
+//            return response()->json(
+//                [
+//                    'resultado' => true,
+//                    'id-busqueda' => $r['grado_id'],
+//                    'grado-entero' => $gradeName,
+//                    'nombre_grado' =>  $gradeName['nombre_grado']
+//                ]
+//            );
             $metadataArray = array(
                 "nombres o id" => $r['grado_id']
             );
