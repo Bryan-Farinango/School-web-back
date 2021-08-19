@@ -200,37 +200,7 @@ class ApiRegisterController extends Controller
             ]
         );
 
-//        $apiKey = $request->input('api_key_admin');
-//
-//        if ( config('app.api_key_admin') != $apiKey){
-//            return response()->json(
-//                [
-//                    'resultado' => false,
-//                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
-//                ]
-//            );
-//        }
-//
-//        $users =  Driver::all();
-//        $getUsers = array();
-//        foreach ($users as $r){
-//            $usersArray = array(
-//                'nombres' => $r['nombres'],
-//                'apellidos' => $r['apellidos'],
-//                'email' => $r['email'],
-//                'telefono' => $r['telefono'],
-//                'rol' => $r['rol'],
-//                'id' => $r['_id'],
-//            );
-//            array_push($getUsers, $usersArray);
-//        }
-//
-//        return response()->json(
-//            [
-//                'resultado' => true,
-//                'usuarios' => $getUsers
-//            ]
-//        );
+
 
     }
     public function updateUsers(Request $request){

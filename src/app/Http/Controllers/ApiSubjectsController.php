@@ -16,6 +16,7 @@ use App\Usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use DataTables;
 
 class ApiSubjectsController extends Controller
 {
@@ -109,7 +110,15 @@ class ApiSubjectsController extends Controller
         );
     }
     public function getSubjects(Request $request){
+        //NEW NEW NEW NEW NEW
+        $defaultLengthTake = 10;
+        $validateFormat = false;
+        $errors = array();
         $apiKey = $request->input('api_key_admin');
+        $inputDataFrom = $request->input('desde');
+        $inputDateTo = $request->input('hasta');
+        $dataTableFormat = $request->input('formato_datatable');
+        $dataTableFormat = isset($dataTableFormat) ? (bool)$dataTableFormat : false;
 
         if ( config('app.api_key_admin') != $apiKey){
             return response()->json(
@@ -120,28 +129,22 @@ class ApiSubjectsController extends Controller
             );
         }
 
-        $materias =  Subject::all();
-        $getMaterias = array();
-        foreach ($materias as $r){
-            $gradeName = Grade::where('_id', $r['grado_id'])
-                ->orderBy("created_at", "desc")
-                ->first();
-            $materiasArray = array(
-                'nombre_asignatura' => $r['nombre_asignatura'],
-                'descripcion' => $r['descripcion'],
-                'anio_escolar' => $r['anio_escolar'],
-                'nombre_grado' => $gradeName['nombre_grado'],
-                'materia_id' => $r['_id']
-            );
-            array_push($getMaterias, $materiasArray);
+        if (!isset($inputDataFrom)) {
+            $inputDataFrom = '01/12/2020';
         }
 
+        $subjects = Subject::select('nombre_asignatura', 'descripcion', 'anio_escolar', 'grado_id')
+            ->take(3000)
+            ->get();
 
-
+        $objeto = Datatables::of($subjects)->addIndexColumn()
+            ->toJson();
+        $objeto = $dataTableFormat ? $objeto : $objeto->original['data'];
         return response()->json(
             [
                 'resultado' => true,
-                'asignaturas' => $getMaterias
+                'mensaje' => 'Consulta realizada existosamente',
+                'materias' => $objeto,
             ]
         );
 
@@ -220,6 +223,44 @@ class ApiSubjectsController extends Controller
             [
                 'resultado' => true,
                 'mensaje' => 'Materia Borrada.'
+            ]
+        );
+    }
+    //test
+    public function getSubjectsSeparate(Request $request){
+        $apiKey = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $materias =  Subject::all();
+        $getMaterias = array();
+        foreach ($materias as $r){
+            $gradeName = Grade::where('_id', $r['grado_id'])
+                ->orderBy("created_at", "desc")
+                ->first();
+            $materiasArray = array(
+                'nombre_asignatura' => $r['nombre_asignatura'],
+                'descripcion' => $r['descripcion'],
+                'anio_escolar' => $r['anio_escolar'],
+                'nombre_grado' => $gradeName['nombre_grado'],
+                'materia_id' => $r['_id']
+            );
+            array_push($getMaterias, $materiasArray);
+        }
+
+
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'asignaturas' => $getMaterias
             ]
         );
     }
