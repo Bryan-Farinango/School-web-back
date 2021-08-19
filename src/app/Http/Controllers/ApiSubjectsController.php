@@ -156,7 +156,7 @@ class ApiSubjectsController extends Controller
             );
 
             $merge =  array_merge( $o, $auxArray);
-            array_push($objeto->toArray(), $merge );
+
 
         }
 
