@@ -138,11 +138,17 @@ class ApiSubjectsController extends Controller
             ->get();
 
         $materias =  Subject::all();
+        $historial = array();
         foreach ($materias as $r){
             $gradeName = Grade::find($r['grado_id']);
             $objeto = Datatables::of($subjects)->addIndexColumn()
                 ->addColumn('nombre_grado', $gradeName['nombre_grado'])
                 ->toJson();
+
+            $metadataArray = array(
+                "nombres o id" => $gradeName
+            );
+            array_push($historial, $metadataArray );
         }
 
 
@@ -159,6 +165,7 @@ class ApiSubjectsController extends Controller
                 'resultado' => true,
                 'mensaje' => 'Consulta realizada existosamente',
                 'materias' => $objeto,
+                "historial" =>$metadataArray
             ]
         );
 
