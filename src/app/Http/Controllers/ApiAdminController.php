@@ -274,6 +274,11 @@ class ApiAdminController extends Controller
             }else{
                 $r['transportista_id'] = 'empty';
                 $r->save();
+
+                $rutasArray += [
+                    'transportista_id' => 'empty',
+
+                ];
             }
             array_push($getRutas, $rutasArray);
         }
