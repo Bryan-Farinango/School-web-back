@@ -134,7 +134,7 @@ class ApiSubjectsController extends Controller
             $inputDataFrom = '01/12/2020';
         }
 
-        $subjects = Subject::select('nombre_asignatura', 'descripcion', 'anio_escolar', 'grado_id')
+        $subjects = Subject::select('nombre_asignatura', 'descripcion', 'anio_escolar', 'grado_id', 'nombre_grado')
             ->take(3000)
             ->get();
 
