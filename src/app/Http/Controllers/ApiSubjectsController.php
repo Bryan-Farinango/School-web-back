@@ -137,37 +137,9 @@ class ApiSubjectsController extends Controller
             ->take(3000)
             ->get();
 
-        $materias =  Subject::all();
-        $historial = array();
-        $i = 0;
-        foreach ($materias as $r){
 
-            $i = $i + 1;
-            $gradeName = Grade::find($r['grado_id']);
-            $objeto = Datatables::of($subjects)->addIndexColumn()
-                ->addColumn('nombre_grado', $gradeName['nombre_grado'], $i)
-                ->toJson();
-
-//            return response()->json(
-//                [
-//                    'resultado' => true,
-//                    'id-busqueda' => $r['grado_id'],
-//                    'grado-entero' => $gradeName,
-//                    'nombre_grado' =>  $gradeName['nombre_grado']
-//                ]
-//            );
-            $metadataArray = array(
-                "nombres o id" => $r['grado_id']
-            );
-//            $metadataArray = array();
-//            $metadataArray += [
-//                "nombres o id" => $r['grado_id']
-//            ];
-            $merge = array_merge($r->toArray(), $metadataArray );
-            array_push($historial, $merge );
-        }
-
-
+        $objeto = Datatables::of($subjects)->addIndexColumn()
+            ->toJson();
         $objeto = $dataTableFormat ? $objeto : $objeto->original['data'];
 
 
@@ -181,8 +153,7 @@ class ApiSubjectsController extends Controller
                 'resultado' => true,
                 'mensaje' => 'Consulta realizada existosamente',
                 'materias' => $objeto,
-                "historial" =>$metadataArray,
-                "materias2" => $materias
+
             ]
         );
 
