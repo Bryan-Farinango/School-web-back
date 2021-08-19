@@ -146,7 +146,7 @@ class ApiSubjectsController extends Controller
                 ->toJson();
 
             $metadataArray = array(
-                "nombres o id" => $gradeName
+                "nombres o id" => $r['grado_id']
             );
             array_push($historial, $metadataArray );
         }
