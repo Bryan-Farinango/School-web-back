@@ -8,6 +8,7 @@ use App\Models\Grade;
 use App\Models\Roles;
 use App\Models\Ruta;
 use App\Models\Subject;
+use App\Models\Usuario;
 use App\Modulo;
 use App\Poliza\Aseguradora;
 use App\SolicitudVinculacion;
@@ -129,7 +130,7 @@ class ApiSubjectsController extends Controller
                 'nombre_asignatura' => $r['nombre_asignatura'],
                 'descripcion' => $r['descripcion'],
                 'anio_escolar' => $r['anio_escolar'],
-                'Grado' => $gradeName['nombre_grado'],
+                'nombre_grado' => $gradeName['nombre_grado'],
             );
             array_push($getMaterias, $materiasArray);
         }
@@ -143,5 +144,82 @@ class ApiSubjectsController extends Controller
             ]
         );
 
+    }
+    public function updateSubjects(Request $request){
+        $api_key_admin = $request->input('api_key_admin');
+        $materiaId = $request->input('materia_id');
+        $nombre = $request->input('nombre_asignatura');
+        $descripcion = $request->input('descripcion');
+        $anio = $request->input('anio_escolar');
+        $grado_id = $request->input('grado_id');
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $grado = Grade::find($grado_id);
+        if ($grado != null ){
+            $newGradeID = $grado->_id;
+        }else{
+            $newGradeID = '';
+        }
+
+        $materia = Subject::where("_id", $materiaId)->get()->first();
+
+        if ($materia == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "La materia no existe."
+                ];
+        }
+
+        $materia->nombre_asignatura = $nombre;
+        $materia->descripcion = $descripcion;
+        $materia->anio_escolar = $anio;
+        $materia->grado_id = $newGradeID;
+        $materia->save();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Datos actualizados.',
+            ]
+        );
+    }
+    public function deleteSubjects(Request $request){
+        $api_key_admin = $request->input('api_key_admin');
+        $materiaId = $request->input('materia_id');
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $materia = Subject::find($materiaId);
+        if ($materiaId == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "La materia no existe."
+                ];
+        }
+
+        $materia->delete();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Materia Borrada.'
+            ]
+        );
     }
 }

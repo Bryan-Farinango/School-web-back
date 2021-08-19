@@ -250,9 +250,7 @@ class ApiAdminController extends Controller
 
         $getRutas = array();
         foreach ($rutas as $r){
-
             $transportistaName = Driver::find($r['transportista_id'] );
-
             $rutasArray = array(
                 'ruta_id' => $r['_id'],
                 'titulo_ruta' => $r['titulo_ruta'],
