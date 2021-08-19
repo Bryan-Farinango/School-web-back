@@ -27,6 +27,7 @@ Route::post('roles', 'ApiRolesController@userRol');
 Route::post('asignaturas', 'ApiSubjectsController@subjects');
 Route::post('get-asignaturas', 'ApiSubjectsController@getSubjects');
 Route::post('publicaciones', 'ApiPublicationsController@publications');
+Route::post('get-asignaturas-separate', 'ApiPublicationsController@getSubjectsSeparate');
 //grados
 Route::post('grados', 'ApiAdminController@schoolGrade');
 Route::post('get-grados', 'ApiAdminController@getGrades');
