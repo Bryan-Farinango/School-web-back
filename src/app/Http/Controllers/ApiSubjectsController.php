@@ -137,11 +137,11 @@ class ApiSubjectsController extends Controller
         $materia = Subject::all();
         foreach ($materia as $m){
             if ($m->grado_id != null ){
-                $grado = Grade::find($materia->grado_id);
+                $grado = Grade::find($m->grado_id);
                 if ($grado == null){
-                    $materia->grado_id = '';
-                    $materia->nombre_grado = 'Sin Asignar';
-                    $materia->save();
+                    $m->grado_id = '';
+                    $m->nombre_grado = 'Sin Asignar';
+                    $m->save();
                 }
             }
         }
