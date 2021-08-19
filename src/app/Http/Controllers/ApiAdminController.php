@@ -247,10 +247,12 @@ class ApiAdminController extends Controller
         }
 
         $rutas =  Ruta::all();
+
         $getRutas = array();
         foreach ($rutas as $r){
 
             $transportistaName = Driver::find($r['transportista_id'] );
+
             $rutasArray = array(
                 'ruta_id' => $r['_id'],
                 'titulo_ruta' => $r['titulo_ruta'],
@@ -258,12 +260,21 @@ class ApiAdminController extends Controller
                 'ciudad' => $r['ciudad'],
                 'sector_1' => $r['sector_1'],
                 'sector_2' => $r['sector_2'],
-                'sector_3' => $r['sector_3'],
-                'transportista_id' => $r['transportista_id'],
-                'nombre_transportista' => $transportistaName['nombres'],
-                'apellido_transportista' => $transportistaName['apellidos'],
+                'sector_3' => $r['sector_3']
+
 
             );
+
+            if ($transportistaName != null){
+                $rutasArray += [
+                    'transportista_id' => $r['transportista_id'],
+                    'nombre_transportista' => $transportistaName['nombres'],
+                    'apellido_transportista' => $transportistaName['apellidos']
+                ];
+            }else{
+                $r['transportista_id'] = 'empty';
+                $r->save();
+            }
             array_push($getRutas, $rutasArray);
         }
 
