@@ -140,6 +140,23 @@ class ApiSubjectsController extends Controller
         $objeto = Datatables::of($subjects)->addIndexColumn()
             ->toJson();
         $objeto = $dataTableFormat ? $objeto : $objeto->original['data'];
+
+
+
+
+
+
+
+        foreach ($objeto->original['data'] as $o){
+            $gradeName = Grade::where('_id', $o['grado_id'])
+                ->orderBy("created_at", "desc")
+                ->first();
+
+            $objeto->original['data'] += [
+                'nombre_grado'=>$gradeName['nombre_grado']
+            ];
+        }
+
         return response()->json(
             [
                 'resultado' => true,
