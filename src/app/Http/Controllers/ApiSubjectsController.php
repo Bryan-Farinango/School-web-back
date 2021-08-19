@@ -171,7 +171,7 @@ class ApiSubjectsController extends Controller
         $nombre = $request->input('nombre_asignatura');
         $descripcion = $request->input('descripcion');
         $anio = $request->input('anio_escolar');
-        $grado_id = $request->input('grado_id');
+        $grado = $request->input('grado');
 
         if ( config('app.api_key_admin') != $api_key_admin){
             return response()->json(
@@ -182,7 +182,8 @@ class ApiSubjectsController extends Controller
             );
         }
 
-        $grado = Grade::find($grado_id);
+        $grado = Grade::where('nombre_grado', $grado)->get()->first();
+
         if ($grado != null ){
             $newGradeID = $grado->_id;
         }else{
