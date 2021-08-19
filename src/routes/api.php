@@ -29,6 +29,7 @@ Route::post('get-asignaturas', 'ApiSubjectsController@getSubjects');
 Route::post('publicaciones', 'ApiPublicationsController@publications');
 Route::post('get-asignaturas-separate', 'ApiPublicationsController@getSubjectsSeparate');
 Route::post('delete-subject', 'ApiPublicationsController@deleteSubjects');
+Route::post('update-subject', 'ApiPublicationsController@updateSubjects');
 //grados
 Route::post('grados', 'ApiAdminController@schoolGrade');
 Route::post('get-grados', 'ApiAdminController@getGrades');
