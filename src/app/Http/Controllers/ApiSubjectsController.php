@@ -131,6 +131,7 @@ class ApiSubjectsController extends Controller
                 'descripcion' => $r['descripcion'],
                 'anio_escolar' => $r['anio_escolar'],
                 'nombre_grado' => $gradeName['nombre_grado'],
+                'materia_id' => $r['_id']
             );
             array_push($getMaterias, $materiasArray);
         }
