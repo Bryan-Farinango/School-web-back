@@ -157,9 +157,10 @@ class ApiSubjectsController extends Controller
 
             $merge =  array_merge( $o, $auxArray);
             array_push($historial, $merge );
-            array_push($objeto, $historial);
+
 
         }
+        array_merge($objeto, $historial);
 
         return response()->json(
             [
