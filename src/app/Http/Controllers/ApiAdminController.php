@@ -382,7 +382,7 @@ class ApiAdminController extends Controller
             return
                 [
                     'resultado' => false,
-                    'mensaje' => "Campo 'cuenta_id' no válido."
+                    'mensaje' => "La ruta no existe."
                 ];
         }
 
@@ -398,6 +398,37 @@ class ApiAdminController extends Controller
             [
                 'resultado' => true,
                 'mensaje' => 'Ruta actualizada.',
+            ]
+        );
+    }
+    public function deleteRuta(Request $request){
+
+        $api_key_admin = $request->input('api_key_admin');
+        $rutaId = $request->input('ruta_id');
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $ruta = Ruta::find($rutaId);
+        if ($ruta == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "No existe la ruta."
+                ];
+        }
+
+        $ruta->delete();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Cuenta Borrada.'
             ]
         );
     }
