@@ -137,29 +137,24 @@ class ApiSubjectsController extends Controller
             ->take(3000)
             ->get();
 
-        $objeto = Datatables::of($subjects)->addIndexColumn()
-            ->addColumn('created_at', 'test')
-            ->toJson();
+        $materias =  Subject::all();
+        foreach ($materias as $r){
+            $gradeName = Grade::where('_id', $r['grado_id'])
+                ->orderBy("created_at", "desc")
+                ->first();
+            $objeto = Datatables::of($subjects)->addIndexColumn()
+                ->addColumn('nombre_grado', $gradeName['nombre_grado'])
+                ->toJson();
+        }
+
+
         $objeto = $dataTableFormat ? $objeto : $objeto->original['data'];
 
 
 
 
 
-//        $historial = array();
-//
-//        foreach ($objeto->original['data'] as $o){
-//            $gradeName = Grade::where('_id', $o['grado_id'])
-//                ->orderBy("created_at", "desc")
-//                ->first();
-//            $auxArray = array(
-//                "nombre_grado" => $gradeName['nombre_grado']
-//            );
-//
-//            $merge =  array_merge( $o, $auxArray);
-//            array_push($objeto->original['data'], $merge );
-//
-//        }
+
 
         return response()->json(
             [
