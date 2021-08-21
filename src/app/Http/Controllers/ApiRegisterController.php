@@ -37,6 +37,12 @@ class ApiRegisterController extends Controller
            ->take(3000)
            ->get();
 
+        return response()->json(
+            [
+                'resultado' => false,
+                'mensaje' => $userLogin
+            ]
+        );
        if ($userLogin == null){
            return response()->json(
                [
