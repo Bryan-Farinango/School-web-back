@@ -20,6 +20,50 @@ use DataTables;
 
 class ApiRegisterController extends Controller
 {
+    public function loginUser(Request $request){
+       $email = $request->input('email');
+       $api_key_admin = $request->input('api_key_admin');
+
+       if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+       $userLogin =  Usuario::where('email', $email)
+           ->take(3000)
+           ->get();
+
+       if ($userLogin == null){
+           return response()->json(
+               [
+                   'resultado' => false,
+                   'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+               ]
+           );
+       }
+
+        $objeto = [
+            'email' => $userLogin->email,
+            'firebase_uid' => $userLogin->firebase_uid,
+            'telefono' => $userLogin->telefono,
+            'rol' => $userLogin->rol,
+            'nombres' => $userLogin->nombres,
+            'apellidos' => $userLogin->apellidos,
+
+        ];
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Login correcto, datos correctos',
+                'objeto' => $objeto
+            ]
+        );
+
+    }
     public function userRegister(Request $request)
     {
         $nombres = $request->input('nombres');
