@@ -33,16 +33,8 @@ class ApiRegisterController extends Controller
             );
         }
 
-       $userLogin =  Usuario::where('email', $email)
-           ->take(3000)
-           ->get();
+       $userLogin =  Usuario::where('email', $email)->get()->first();
 
-        return response()->json(
-            [
-                'resultado' => false,
-                'mensaje' => $userLogin
-            ]
-        );
        if ($userLogin == null){
            return response()->json(
                [
