@@ -21,6 +21,9 @@ Route::post('delete-users', 'ApiRegisterController@deleteUsers');
 //transportista
 Route::post('transportista', 'ApiRegisterController@transportistaRegister');
 Route::post('get-transportistas', 'ApiRegisterController@getTransportistas');
+Route::post('update-transportistas', 'ApiRegisterController@updateTransportistas');
+Route::post('delete-transportistas', 'ApiRegisterController@deleteTransportista');
+Route::post('get-transportistas-datatable', 'ApiRegisterController@getTransportistaTable');
 //roles
 Route::post('roles', 'ApiRolesController@userRol');
 //materias

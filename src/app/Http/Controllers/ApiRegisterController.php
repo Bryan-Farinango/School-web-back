@@ -466,5 +466,114 @@ class ApiRegisterController extends Controller
         );
 
     }
+    public function updateTransportistas(Request $request){
+        $api_key_admin = $request->input('api_key_admin');
+        $cuentaId = $request->input('cuenta_id');
+        $nombres = $request->input('nombres');
+        $apellidos = $request->input('apellidos');
+        $capacidad = $request->input('capacidad');
+        $telefono = $request->input('telefono');
+        $experiencia = $request->input('experiencia_laboral');
 
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $cuenta = Driver::where("_id", $cuentaId)->get()->first();
+
+        if ($cuenta == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "El transportista no existe."
+                ];
+        }
+
+        $cuenta->nombres = $nombres;
+        $cuenta->apellidos = $apellidos;
+        $cuenta->capacidad = $capacidad;
+        $cuenta->telefono = $telefono;
+        $cuenta->experiencia_laboral = $experiencia;
+        $cuenta->save();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Datos actualizados.',
+            ]
+        );
+    }
+    public function deleteTransportista(Request $request){
+        $api_key_admin = $request->input('api_key_admin');
+        $cuentaId = $request->input('cuenta_id');
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $cuenta = Driver::find($cuentaId);
+        if ($cuenta == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "El transportista no existe."
+                ];
+        }
+
+        $cuenta->delete();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Transportista Eliminado.'
+            ]
+        );
+    }
+    public function getTransportistaTable(Request $request){
+        $defaultLengthTake = 10;
+        $validateFormat = false;
+        $errors = array();
+        $apiKey = $request->input('api_key_admin');
+        $inputDataFrom = $request->input('desde');
+        $inputDateTo = $request->input('hasta');
+        $dataTableFormat = $request->input('formato_datatable');
+        $dataTableFormat = isset($dataTableFormat) ? (bool)$dataTableFormat : false;
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        if (!isset($inputDataFrom)) {
+            $inputDataFrom = '01/12/2020';
+        }
+
+        $usuarios = Driver::select('nombres', 'apellidos', 'capacidad', 'telefono', 'experiencia_laboral')
+            ->take(3000)
+            ->get();
+
+        $objeto = Datatables::of($usuarios)->addIndexColumn()
+            ->toJson();
+        $objeto = $dataTableFormat ? $objeto : $objeto->original['data'];
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Consulta realizada existosamente',
+                'usuarios' => $objeto,
+            ]
+        );
+    }
 }
