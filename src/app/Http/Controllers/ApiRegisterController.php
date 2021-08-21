@@ -47,12 +47,12 @@ class ApiRegisterController extends Controller
        }
 
         $objeto = [
-            'email' => $userLogin->email,
-            'firebase_uid' => $userLogin->firebase_uid,
-            'telefono' => $userLogin->telefono,
-            'rol' => $userLogin->rol,
-            'nombres' => $userLogin->nombres,
-            'apellidos' => $userLogin->apellidos,
+            'email' => $userLogin['email'],
+            'firebase_uid' => $userLogin['firebase_uid'],
+            'telefono' => $userLogin['telefono'],
+            'rol' => $userLogin['rol'],
+            'nombres' => $userLogin['nombres'],
+            'apellidos' => $userLogin['apellidos'],
 
         ];
         return response()->json(
