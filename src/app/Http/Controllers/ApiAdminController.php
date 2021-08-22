@@ -505,7 +505,7 @@ class ApiAdminController extends Controller
         }
 
 
-        $student->insert(array(
+        $student->push(array(
             'materias' => $newArray
         ));
 
