@@ -455,6 +455,7 @@ class ApiAdminController extends Controller
                 $gradeName = $grado->nombre_grado;
             }
             $studentArray = array(
+                'estudiante_id' => $g['_id'],
                 'nombres' => $g['nombres'],
                 'apellidos' => $g['apellidos'],
                 'identificacion' => $g['identificacion'],
