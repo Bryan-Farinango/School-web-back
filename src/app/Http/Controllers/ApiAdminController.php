@@ -8,6 +8,7 @@ use App\Models\Enums\EstadoFirmaEnum;
 use App\Models\Grade;
 use App\Models\Ruta;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Proceso;
@@ -470,6 +471,44 @@ class ApiAdminController extends Controller
             [
                 'resultado' => true,
                 'solicitudes' => $getStudent
+            ]
+        );
+
+    }
+    public function aprobarEstudiante(Request $request){
+        //matricular
+        $apiKey = $request->input('api_key_admin');
+        $estudiante_id = $request->input('estudiante_id');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $student = Student::find($estudiante_id);
+        $student->estado = 1;
+        $student->save();
+
+
+        $subjects = Subject::where('grado_id', $student->grado_id)->get();
+        $newArray = array();
+        foreach ($subjects as $s){
+            $subjectsArray = array(
+                'materia_id' => $s['_id'],
+                'nombre_asignatura' => $s['nombre_asignatura'],
+            );
+            array_push($newArray, $subjectsArray);
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'nuevo arreglo.',
+                'arreglo' => $newArray
             ]
         );
 
