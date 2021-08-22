@@ -46,6 +46,7 @@ Route::post('update-rutas', 'ApiAdminController@updateAllDriver');
 Route::post('delete-rutas', 'ApiAdminController@deleteRuta');
 //estudiantes
 Route::post('add-estudiantes', 'ApiRegisterController@estudiantes');
+Route::post('get-estudiantes', 'ApiRegisterController@getEstudiantesInfo');
 
 
 // Route::post('emitir_simple',  function (Request $request){

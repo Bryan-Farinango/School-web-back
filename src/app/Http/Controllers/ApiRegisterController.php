@@ -877,4 +877,33 @@ class ApiRegisterController extends Controller
             ]
         );
     }
+    public function getEstudiantesInfo(Request $request){
+        $usuario_id = $request->input('usuario_id');
+
+       if (empty($usuario_id)){
+           return response()->json(
+               [
+                   'resultado' => false,
+                   'mensaje' => 'usuario_id necesario.'
+               ]
+           );
+       }
+
+        $students =  Student::where('usuario_id', $usuario_id)->get();
+        if ($students == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'El estudiante no existe'
+                ]
+            );
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'objeto' => $students
+            ]
+        );
+    }
 }
