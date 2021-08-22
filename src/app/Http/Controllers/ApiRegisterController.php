@@ -6,7 +6,9 @@ use App\Models\Cuenta;
 use App\Models\Driver;
 use App\Models\Enums\AccionProcesoEnum;
 use App\Models\Enums\EstadoFirmaEnum;
+use App\Models\Grade;
 use App\Models\Ruta;
+use App\Models\Student;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Proceso;
@@ -616,6 +618,165 @@ class ApiRegisterController extends Controller
                 'resultado' => true,
                 'mensaje' => 'Consulta realizada existosamente',
                 'usuarios' => $objeto,
+            ]
+        );
+    }
+
+    //estudiantes
+    public function estudiantes(Request $request){
+
+
+        $nombres = $request->input('nombres');
+        $apellidos = $request->input('apellidos');
+        $identificacion = $request->input('identificacion');
+        $edad = (int)$request->input('edad');
+        $genero = $request->input('genero');
+        $grado = $request->input('nombre_grado');
+        $jornada = $request->input('jornada');
+        $usuario_id = $request->input('usuario_id');
+
+        //validaciones
+        if (empty($identificacion)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'Identificacion requerida.'
+                ]
+            );
+        }
+
+        if (empty($nombres)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'nombres requeridos.'
+                ]
+            );
+        }
+
+        if (empty($apellidos)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'apellidos requeridos.'
+                ]
+            );
+        }
+
+        if (empty($edad)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'edad requerida.'
+                ]
+            );
+        }
+
+        if (empty($genero)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'genero requerido.'
+                ]
+            );
+        }
+
+        if (empty($grado)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'grado requerido.'
+                ]
+            );
+        }
+
+        if (empty($jornada)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'jornada requerida.'
+                ]
+            );
+        }
+
+        if (empty($usuario_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'usuario_id requerido.'
+                ]
+            );
+        }
+
+        $grado_id = Grade::where('nombre_grado', $grado)
+            ->orderBy("created_at", "desc")
+            ->first();
+
+        if (empty($grado_id)){
+            return response()-> json(
+                [
+
+                    'resultado' => false,
+                    'mensaje' => 'El grado no existe'
+                ]
+            );
+        }
+
+        $userLogged = Usuario::find($usuario_id);
+        if ($userLogged == null){
+            return response()-> json(
+                [
+
+                    'resultado' => false,
+                    'mensaje' => 'El usuario no existe'
+                ]
+            );
+        }
+
+        $usuarios = [
+
+            'nombres' => $nombres,
+            'apellidos' => $apellidos,
+            'identificacion' => $identificacion,
+            'edad' => $edad,
+            'genero' => $genero,
+            'grado_id' => $grado_id->_id,
+            'nombre_grado' => $grado->nombre_grado,
+            'jornada' => $jornada,
+            'usuario_id' => $userLogged->_id
+        ];
+
+
+
+        $userValidation = Student::where('identificacion', $identificacion)
+            ->orderBy("created_at", "desc")
+            ->first();
+
+        if ($userValidation != null) {
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => "El estudiante ya existe."
+                ]
+            );
+        }
+
+        try {
+            $cuenta = Student::create($usuarios);
+        }catch (Exception $e){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No se pudo crear el estudiante.'
+                ]
+            );
+        }
+
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Inscripción correcta.'
             ]
         );
     }
