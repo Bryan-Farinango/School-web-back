@@ -147,7 +147,7 @@ class ApiSubjectsController extends Controller
         }
 
 
-        $subjects = Subject::select('nombre_asignatura', 'descripcion', 'anio_escolar', 'grado_id', 'nombre_grado')
+        $subjects = Subject::select('nombre_asignatura', 'descripcion', 'anio_escolar', 'grado_id', 'nombre_grado', 'usuario_id', 'nombre_profesor')
             ->take(3000)
             ->get();
 
@@ -179,6 +179,7 @@ class ApiSubjectsController extends Controller
         $descripcion = $request->input('descripcion');
         $anio = $request->input('anio_escolar');
         $grado = $request->input('grado');
+        $profesor_id = $request->input('usuario_id');
 
         if ( config('app.api_key_admin') != $api_key_admin){
             return response()->json(
@@ -199,6 +200,17 @@ class ApiSubjectsController extends Controller
             $newNombreGrado = '';
         }
 
+        //profesor
+        $teacher = Usuario::find($profesor_id);
+
+        if ($teacher != null ){
+            $newTeacherID = $teacher->_id;
+            $newNombreProfesor = $teacher->nombres;
+        }else{
+            $newTeacherID = '';
+            $newNombreProfesor = 'Sin Asignar';
+        }
+
         $materia = Subject::where("_id", $materiaId)->get()->first();
 
         if ($materia == null) {
@@ -215,6 +227,14 @@ class ApiSubjectsController extends Controller
         $materia->grado_id = $newGradeID;
         $materia->nombre_grado = $newNombreGrado;
         $materia->save();
+
+        $materia->push(
+            'usuario_id' , $newTeacherID
+        );
+
+        $materia->push(
+            'nombre_profesor', $newNombreProfesor
+        );
 
         return response()->json(
             [
