@@ -906,4 +906,34 @@ class ApiRegisterController extends Controller
             ]
         );
     }
+    public function deleteSolicitudEstudiantes(Request $request){
+
+        $usuario_id = $request->input('usuario_id');
+
+        if (empty($usuario_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'Usuario no exite inicia sesión.'
+                ]
+            );
+        }
+
+        $cuenta = Student::where('usuario_id', $usuario_id)->get();
+        if ($cuenta == null) {
+            return
+                [
+                    'resultado' => false,
+                    'mensaje' => "El estudiante no existe."
+                ];
+        }
+
+        $cuenta->delete();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Solicitud borrada.'
+            ]
+        );
+    }
 }
