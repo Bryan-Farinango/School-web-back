@@ -518,7 +518,30 @@ class ApiAdminController extends Controller
         );
 
     }
+    public function rechazarEstudiante(Request $request){
+        $apiKey = $request->input('api_key_admin');
+        $estudiante_id = $request->input('estudiante_id');
 
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $student = Student::find($estudiante_id);
+        $student->estado = 2;
+        $student->save();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Matrícula rechazada'
+            ]
+        );
+    }
 
 
 }

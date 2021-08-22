@@ -50,6 +50,7 @@ Route::post('get-estudiantes', 'ApiRegisterController@getEstudiantesInfo');
 Route::post('del-solicitud-estudiante', 'ApiRegisterController@deleteSolicitudEstudiantes');
 Route::post('get-solicitud-estudiante', 'ApiAdminController@getAllStudents');
 Route::post('aprobar-estudiante', 'ApiAdminController@aprobarEstudiante');
+Route::post('rechazar-estudiante', 'ApiAdminController@rechazarEstudiante');
 
 
 // Route::post('emitir_simple',  function (Request $request){
