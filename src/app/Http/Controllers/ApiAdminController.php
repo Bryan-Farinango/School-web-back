@@ -505,9 +505,9 @@ class ApiAdminController extends Controller
         }
 
 
-        $student->push(array(
-            'materias' => $newArray
-        ));
+        $student->push(
+            'materias' , $newArray
+        );
 
         return response()->json(
             [
