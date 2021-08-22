@@ -59,6 +59,12 @@ class ApiRegisterController extends Controller
 
        $estadoAux = false;
         if ($userLogin != null){
+            return response()->json(
+                [
+                    'resultado' => true,
+                    'mensaje' => 'entro a user diferente de null'
+                ]
+            );
             $student = Student::where('usuario_id', $userLogin->_id)->orderBy("created_at", "desc");
             if ($student != null){
                 foreach ($student as $s){
