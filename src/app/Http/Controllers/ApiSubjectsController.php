@@ -311,4 +311,24 @@ class ApiSubjectsController extends Controller
             ]
         );
     }
+    public function getTeachers(Request $request){
+        $apiKey = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $teachers = Usuario::where('rol', 'Profesor')->get();
+        return response()->json(
+            [
+                'resultado' => true,
+                'profesores' => $teachers
+            ]
+        );
+    }
 }
