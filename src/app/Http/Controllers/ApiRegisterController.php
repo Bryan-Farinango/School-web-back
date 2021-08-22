@@ -22,6 +22,75 @@ use DataTables;
 
 class ApiRegisterController extends Controller
 {
+    public function getUserInfo(Request $request){
+        $id = $request->input('usuario_id');
+        $api_key_admin = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $api_key_admin){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para crear usuarios.'
+                ]
+            );
+        }
+
+        $userLogin =  Usuario::find($id)->get()->first();
+
+        if ($userLogin == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'El usuario no existe.'
+                ]
+            );
+        }
+
+        $objeto = [
+            'user_id' =>  $userLogin['_id'],
+            'email' => $userLogin['email'],
+            'firebase_uid' => $userLogin['firebase_uid'],
+            'telefono' => $userLogin['telefono'],
+            'rol' => $userLogin['rol'],
+            'nombres' => $userLogin['nombres'],
+            'apellidos' => $userLogin['apellidos'],
+
+        ];
+
+        $estadoAux = false;
+        if ($userLogin != null){
+
+            $student = Student::where('usuario_id', $userLogin->_id)->orderBy("created_at", "desc")->get();
+            if ($student != null){
+                foreach ($student as $s){
+                    if ($s['estado'] == 1){
+                        $estadoAux = true;
+                    }
+                }
+            }
+        }
+
+        if ($estadoAux == true){
+            $objeto += [
+                'matricula' => true
+            ];
+        }else{
+            $objeto += [
+                'matricula' => false
+            ];
+        }
+
+
+
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Consulta de datos correcta',
+                'objeto' => $objeto,
+            ]
+        );
+    }
     public function loginUser(Request $request){
        $email = $request->input('email');
        $api_key_admin = $request->input('api_key_admin');
