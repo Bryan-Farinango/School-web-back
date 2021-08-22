@@ -504,9 +504,9 @@ class ApiAdminController extends Controller
             array_push($newArray, $subjectsArray);
         }
 
-        $student->insert(array(
-            'materias' => $newArray
-        ));
+        $student->insertMany([
+                                 'materias' => $newArray
+                             ]);
 
         return response()->json(
             [
