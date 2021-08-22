@@ -88,7 +88,6 @@ class ApiRegisterController extends Controller
                 'resultado' => true,
                 'mensaje' => 'Login correcto, datos correctos',
                 'objeto' => $objeto,
-                'estudiante' => $student
             ]
         );
 
