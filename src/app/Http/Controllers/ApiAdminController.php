@@ -490,8 +490,8 @@ class ApiAdminController extends Controller
         }
 
         $student = Student::find($estudiante_id);
-        $student->estado = 1;
-        $student->save();
+//        $student->estado = 1;
+//        $student->save();
 
 
         $subjects = Subject::where('grado_id', $student->grado_id)->get();
@@ -504,9 +504,10 @@ class ApiAdminController extends Controller
             array_push($newArray, $subjectsArray);
         }
 
-        $student->insertMany([
-                                 'materias' => $newArray
-                             ]);
+
+        $student->insert(array(
+            'materias' => $newArray
+        ));
 
         return response()->json(
             [

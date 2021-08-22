@@ -28,7 +28,8 @@ class Subject extends Model
     'descripcion',
     'anio_escolar',
     'grado_id',
-    'nombre_grado'
+    'nombre_grado',
+     'materias'
     ];
 
 }
