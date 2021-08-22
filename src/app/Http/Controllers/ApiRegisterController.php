@@ -65,7 +65,8 @@ class ApiRegisterController extends Controller
                 return response()->json(
                     [
                         'resultado' => true,
-                        'mensaje' => 'entro a student diferente de null'
+                        'mensaje' => 'entro a student diferente de null',
+                        'student'=>$student
                     ]
                 );
                 foreach ($student as $s){
