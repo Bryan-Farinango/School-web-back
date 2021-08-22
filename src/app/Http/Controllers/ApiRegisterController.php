@@ -41,7 +41,7 @@ class ApiRegisterController extends Controller
            return response()->json(
                [
                    'resultado' => false,
-                   'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                   'mensaje' => 'El usuario no existe.'
                ]
            );
        }
@@ -56,6 +56,32 @@ class ApiRegisterController extends Controller
             'apellidos' => $userLogin['apellidos'],
 
         ];
+
+       $estadoAux = false;
+        if ($userLogin != null){
+            $student = Student::where('usuario_id', $userLogin->_id)->orderBy("created_at", "desc");
+            if ($student != null){
+                foreach ($student as $s){
+                    if ($s['estado'] == 1){
+                        $estadoAux = true;
+                    }
+                }
+            }
+        }
+
+        if ($estadoAux == true){
+            $objeto += [
+                'matricula' => true
+            ];
+        }else{
+            $objeto += [
+                'matricula' => false
+            ];
+        }
+
+
+
+
         return response()->json(
             [
                 'resultado' => true,

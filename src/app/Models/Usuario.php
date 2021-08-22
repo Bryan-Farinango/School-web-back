@@ -33,7 +33,8 @@ class Usuario extends Model
         'telefono',
         'temporal_password',
         'origen',
-        'firebase_uid'
+        'firebase_uid',
+        'matricula'
     ];
 
 }
