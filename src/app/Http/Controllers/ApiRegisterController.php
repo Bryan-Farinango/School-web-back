@@ -35,7 +35,7 @@ class ApiRegisterController extends Controller
             );
         }
 
-        $userLogin =  Usuario::find($id)->get()->first();
+        $userLogin =  Usuario::find($id);
 
         if ($userLogin == null){
             return response()->json(
