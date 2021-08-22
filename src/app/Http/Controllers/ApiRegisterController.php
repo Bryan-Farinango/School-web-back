@@ -60,7 +60,7 @@ class ApiRegisterController extends Controller
        $estadoAux = false;
         if ($userLogin != null){
 
-            $student = Student::where('usuario_id', $userLogin->_id)->orderBy("created_at", "desc");
+            $student = Student::where('usuario_id', $userLogin->_id)->orderBy("created_at", "desc")->get();
             if ($student != null){
                 return response()->json(
                     [
