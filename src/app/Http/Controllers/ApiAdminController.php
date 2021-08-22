@@ -7,6 +7,7 @@ use App\Models\Enums\AccionProcesoEnum;
 use App\Models\Enums\EstadoFirmaEnum;
 use App\Models\Grade;
 use App\Models\Ruta;
+use App\Models\Student;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Proceso;
@@ -429,6 +430,49 @@ class ApiAdminController extends Controller
                 'mensaje' => 'Cuenta Borrada.'
             ]
         );
+    }
+
+    //students
+    public function getAllStudents(Request $request){
+        $apiKey = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $students =  Student::where('estado', 0)->get();
+        $getStudent = array();
+        foreach ($students as $g){
+            $gradeName = 'No existe el grado';
+            $grado = Grade::find($g['grado_id']);
+            if ($grado != null){
+                $gradeName = $grado->nombre_grado;
+            }
+            $studentArray = array(
+                'nombres' => $g['nombres'],
+                'apellidos' => $g['apellidos'],
+                'identificacion' => $g['identificacion'],
+                'edad' => $g['edad'],
+                'genero' => $g['genero'],
+                'nombre_grado' => $gradeName,
+                'jornada' => $g['jornada'],
+
+            );
+            array_push($getStudent, $studentArray);
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'grados' => $getStudent
+            ]
+        );
+
     }
 
 

@@ -48,6 +48,7 @@ Route::post('delete-rutas', 'ApiAdminController@deleteRuta');
 Route::post('add-estudiantes', 'ApiRegisterController@estudiantes');
 Route::post('get-estudiantes', 'ApiRegisterController@getEstudiantesInfo');
 Route::post('del-solicitud-estudiante', 'ApiRegisterController@deleteSolicitudEstudiantes');
+Route::post('get-solicitud-estudiante', 'ApiAdminController@getAllStudents');
 
 
 // Route::post('emitir_simple',  function (Request $request){
