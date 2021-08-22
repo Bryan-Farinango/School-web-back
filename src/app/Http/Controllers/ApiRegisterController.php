@@ -45,6 +45,7 @@ class ApiRegisterController extends Controller
        }
 
         $objeto = [
+            'user_id' =>  $userLogin['_id'],
             'email' => $userLogin['email'],
             'firebase_uid' => $userLogin['firebase_uid'],
             'telefono' => $userLogin['telefono'],
