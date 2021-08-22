@@ -909,7 +909,7 @@ class ApiRegisterController extends Controller
     public function deleteSolicitudEstudiantes(Request $request){
 
         $usuario_id = $request->input('usuario_id');
-
+        $estudiante_id =$request->input('estudiante_id');
         if (empty($usuario_id)){
             return response()->json(
                 [
@@ -919,7 +919,7 @@ class ApiRegisterController extends Controller
             );
         }
 
-        $cuenta = Student::where('usuario_id', $usuario_id)->get();
+        $cuenta = Student::find($estudiante_id);
         if ($cuenta == null) {
             return
                 [
