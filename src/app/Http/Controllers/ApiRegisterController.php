@@ -62,13 +62,6 @@ class ApiRegisterController extends Controller
 
             $student = Student::where('usuario_id', $userLogin->_id)->orderBy("created_at", "desc")->get();
             if ($student != null){
-                return response()->json(
-                    [
-                        'resultado' => true,
-                        'mensaje' => 'entro a student diferente de null',
-                        'student'=>$student
-                    ]
-                );
                 foreach ($student as $s){
                     if ($s['estado'] == 1){
                         $estadoAux = true;
