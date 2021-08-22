@@ -743,7 +743,8 @@ class ApiRegisterController extends Controller
             'grado_id' => $grado_id->_id,
             'nombre_grado' => $grado_id->nombre_grado,
             'jornada' => $jornada,
-            'usuario_id' => $userLogged->_id
+            'usuario_id' => $userLogged->_id,
+            'estado' => 0
         ];
 
 

@@ -33,7 +33,14 @@ class Student extends Model
         'grado_id',
         'nombre_grado',
         'jornada',
-        'usuario_id'
+        'usuario_id',
+        'estado'
     ];
+
+    /*
+     * estados:
+     * 0 PENDIENTE
+     * 1 APROBADO
+     */
 
 }
