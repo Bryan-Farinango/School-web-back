@@ -63,7 +63,7 @@ class ApiRegisterController extends Controller
             $student = Student::where('usuario_id', $userLogin['_id'])->orderBy("created_at", "desc")->get();
             if ($student != null){
                 foreach ($student as $s){
-                    if ($s['estado'] == 1){
+                    if ($s['estado'] == 0){
                         $estadoAux = true;
                     }
                 }
