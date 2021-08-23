@@ -501,6 +501,7 @@ class ApiAdminController extends Controller
             $subjectsArray = array(
                 'materia_id' => $s['_id'],
                 'profesor_id' => $s['usuario_id'],
+                'grado_id' => $s['grado_id'],
                 'nombre_asignatura' => $s['nombre_asignatura'],
 
             );
@@ -548,6 +549,7 @@ class ApiAdminController extends Controller
     //teacher-apis
     public function getMyStudents(Request $request){
         $teacherId = $request->input('usuario_id');
+        $materiaId = $request->input('asignatura_id');
 
         if(empty($teacherId)){
             return response()->json(
