@@ -53,6 +53,9 @@ Route::post('get-solicitud-estudiante', 'ApiAdminController@getAllStudents');
 Route::post('aprobar-estudiante', 'ApiAdminController@aprobarEstudiante');
 Route::post('rechazar-estudiante', 'ApiAdminController@rechazarEstudiante');
 
+Route::post('get-my-estudiante', 'ApiAdminController@getMyStudents');
+
+
 
 // Route::post('emitir_simple',  function (Request $request){
 //     return json_encode(array("result" => "si"));

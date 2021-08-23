@@ -550,6 +550,7 @@ class ApiAdminController extends Controller
     public function getMyStudents(Request $request){
         $teacherId = $request->input('usuario_id');
         $materiaId = $request->input('asignatura_id');
+        $gradoId = $request->input('grado_id');
 
         if(empty($teacherId)){
             return response()->json(
@@ -560,6 +561,31 @@ class ApiAdminController extends Controller
             );
         }
 
-        $students = Student::all();
+        $dataMatch = array();
+
+        if ($materiaId != 'todos'){
+            $dataMatch += [
+                "materias.materia_id" => $materiaId
+            ];
+        }
+
+        if ($gradoId != 'todos'){
+            $dataMatch += [
+                "materias.grado_id" => $materiaId
+            ];
+        }
+
+        $dataMatch += [
+            "materias.profesor_id" => $teacherId
+        ];
+
+        $students = Student::where($dataMatch)->get();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'estudantes' => $students
+            ]
+        );
     }
 }
