@@ -232,13 +232,13 @@ class ApiSubjectsController extends Controller
             $materia->usuario_id = $newTeacherID;
             $materia->nombre_profesor = $newNombreProfesor;
         }else{
-            $materia->push(
-                'usuario_id' , $newTeacherID
-            );
+            $materia->push(array(
+                'usuario_id' => $newTeacherID
+            ));
 
-            $materia->push(
+            $materia->push(array(
                 'nombre_profesor', $newNombreProfesor
-            );
+            ));
         }
 
 
