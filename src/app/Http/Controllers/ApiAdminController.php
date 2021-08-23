@@ -500,7 +500,9 @@ class ApiAdminController extends Controller
         foreach ($subjects as $s){
             $subjectsArray = array(
                 'materia_id' => $s['_id'],
+                'profesor_id' => $s['usuario_id'],
                 'nombre_asignatura' => $s['nombre_asignatura'],
+
             );
             array_push($newArray, $subjectsArray);
         }
@@ -543,5 +545,19 @@ class ApiAdminController extends Controller
         );
     }
 
+    //teacher-apis
+    public function getMyStudents(Request $request){
+        $teacherId = $request->input('usuario_id');
 
+        if(empty($teacherId)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'Campo profesor_id vacío.'
+                ]
+            );
+        }
+
+        $students = Student::all();
+    }
 }
