@@ -228,13 +228,19 @@ class ApiSubjectsController extends Controller
         $materia->nombre_grado = $newNombreGrado;
         $materia->save();
 
-        $materia->push(
-            'usuario_id' , $newTeacherID
-        );
+        if(isset($materia->usuario_id)){
+            $materia->usuario_id = $newTeacherID;
+            $materia->nombre_profesor = $newNombreProfesor;
+        }else{
+            $materia->push(
+                'usuario_id' , $newTeacherID
+            );
 
-        $materia->push(
-            'nombre_profesor', $newNombreProfesor
-        );
+            $materia->push(
+                'nombre_profesor', $newNombreProfesor
+            );
+        }
+
 
         return response()->json(
             [
