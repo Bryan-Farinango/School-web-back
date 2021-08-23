@@ -589,7 +589,7 @@ class ApiAdminController extends Controller
 
         if ($gradoId != 'todos'){
             $dataMatch += [
-                "materias.grado_id" => $materiaId
+                "materias.grado_id" => $gradoId
             ];
         }
 
