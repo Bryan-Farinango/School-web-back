@@ -84,7 +84,9 @@ class ApiSubjectsController extends Controller
             'descripcion' => $descripcion,
             'anio_escolar' => $anio_escolar,
             'grado_id' => $grado_id->_id,
-            'nombre_grado' => $grado_id->nombre_grado
+            'nombre_grado' => $grado_id->nombre_grado,
+            'usuario_id' => '',
+            'nombre_profesor' => ''
 
         ];
         $materiaValidacion = Subject::where('nombre_asignatura', $nombre_asignatura)
@@ -226,21 +228,12 @@ class ApiSubjectsController extends Controller
         $materia->anio_escolar = $anio;
         $materia->grado_id = $newGradeID;
         $materia->nombre_grado = $newNombreGrado;
+
+
+        $materia->usuario_id = $newTeacherID;
+        $materia->nombre_profesor = $newNombreProfesor;
+
         $materia->save();
-
-        if(isset($materia->usuario_id)){
-            $materia->usuario_id = $newTeacherID;
-            $materia->nombre_profesor = $newNombreProfesor;
-        }else{
-            $materia->push(array(
-                'usuario_id' => $newTeacherID
-            ));
-
-            $materia->push(array(
-                'nombre_profesor', $newNombreProfesor
-            ));
-        }
-
 
         return response()->json(
             [
