@@ -54,6 +54,7 @@ Route::post('aprobar-estudiante', 'ApiAdminController@aprobarEstudiante');
 Route::post('rechazar-estudiante', 'ApiAdminController@rechazarEstudiante');
 
 Route::post('get-my-estudiante', 'ApiAdminController@getMyStudents');
+Route::post('get-my-subject', 'ApiSubjectsController@getMySubjects');
 
 
 

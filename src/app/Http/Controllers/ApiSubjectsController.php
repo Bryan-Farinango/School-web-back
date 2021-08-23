@@ -330,4 +330,20 @@ class ApiSubjectsController extends Controller
             ]
         );
     }
+
+    //get subjects para un determinado profesor
+    public function getMySubjects(Request $request){
+        $ProfesorId = $request->input('usuario_id');
+
+
+
+        $materias =  Subject::where('usuario_id', $ProfesorId)->get();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'asignaturas' => $materias
+            ]
+        );
+    }
 }
