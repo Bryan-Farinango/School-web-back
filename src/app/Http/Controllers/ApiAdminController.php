@@ -561,6 +561,24 @@ class ApiAdminController extends Controller
             );
         }
 
+        if(empty($materiaId)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'Campo materia_id vacío.'
+                ]
+            );
+        }
+
+        if(empty($gradoId)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'Campo grado_id vacío.'
+                ]
+            );
+        }
+
         $dataMatch = array();
 
         if ($materiaId != 'todos'){
