@@ -643,8 +643,8 @@ class ApiAdminController extends Controller
                     'nombre_asignatura' => $materia['nombre_asignatura'],
 
                 );
-                array_push($newArray, $materiaArr);
             }
+            array_push($newArray, $materiaArr);
         }
 
 
