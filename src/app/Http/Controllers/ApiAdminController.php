@@ -794,12 +794,14 @@ class ApiAdminController extends Controller
                     $profesor = Usuario::find($materia->usuario_id);
                     if  ($profesor != null){
                         $notificationArray += [
-                            "notificacion_profesor" => $profesor->nombres
+                            "notificacion_profesor" => $profesor->nombres,
+                            "notificacion_profesor_apellidos" => $profesor->apellidos
                         ];
                     }
                 }else{
                     $notificationArray += [
-                        "notificacion_profesor" => "no tiene asignado un profesor"
+                        "notificacion_profesor" => "no tiene asignado un profesor",
+                        "notificacion_profesor_apellidos" => "no tiene asignado un profesor"
                     ];
                 }
 
