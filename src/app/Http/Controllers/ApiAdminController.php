@@ -606,4 +606,26 @@ class ApiAdminController extends Controller
             ]
         );
     }
+
+    public function getMateriaFromEstudiante(Request $request){
+        $estudiante_id = $request->input('estudiante_id');
+
+        $estudiante = Student::find($estudiante_id);
+        if ($estudiante == null ){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'El estudiante no existe'
+                ]
+            );
+        }
+        return response()->json(
+            [
+                'resultado' => true,
+                'materias' => $estudiante->materias
+            ]
+        );
+
+
+    }
 }
