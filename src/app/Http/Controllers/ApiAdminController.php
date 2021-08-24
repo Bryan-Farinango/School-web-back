@@ -6,6 +6,7 @@ use App\Models\Driver;
 use App\Models\Enums\AccionProcesoEnum;
 use App\Models\Enums\EstadoFirmaEnum;
 use App\Models\Grade;
+use App\Models\Notification;
 use App\Models\Ruta;
 use App\Models\Student;
 use App\Models\Subject;
@@ -627,5 +628,93 @@ class ApiAdminController extends Controller
         );
 
 
+    }
+    public function createNotification(Request $request){
+
+        $tema = $request->input('tema');
+        $titulo = $request->input('titulo');
+        $fecha = $request->input('fecha');
+        $mensaje = $request->input('mensaje');
+        $estudiante_id = $request->input('estudiante_id');
+        $materia_id = $request->input('materia_id');
+        $usuario_id = $request->input('usuario_id');
+
+        if (empty($tema)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'Tema requerido.'
+                ]
+            );
+        }
+        if (empty($usuario_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'usuario_id requerido.'
+                ]
+            );
+        }
+        if (empty($titulo)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'titulo requerido.'
+                ]
+            );
+        }
+        if (empty($fecha)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'fecha requerida.'
+                ]
+            );
+        }
+        if (empty($mensaje)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'mensaje requerido.'
+                ]
+            );
+        }
+        if (empty($estudiante_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'estudiante_id requerido.'
+                ]
+            );
+        }
+        if (empty($materia_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'materia_id requerido.'
+                ]
+            );
+        }
+
+        $notificacionArray = [
+            'tema' => $tema,
+            'titulo'=> $titulo,
+            'fecha'=> $fecha,
+            'mensaje'=> $mensaje,
+            'estudiante_id'=> $estudiante_id,
+            'usuario_id'=> $usuario_id,
+            'materia_id'=> $materia_id
+        ];
+        try {
+            $notificaionCreate = Notification::create($notificacionArray);
+        }catch (Exception $e){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No se pudo crear el grado.',
+                    'error' => $e
+                ]
+            );
+        }
     }
 }

@@ -57,8 +57,9 @@ Route::post('get-my-estudiante', 'ApiAdminController@getMyStudents');
 Route::post('get-my-subject', 'ApiSubjectsController@getMySubjects');
 Route::post('get-materia-de-estudiante', 'ApiAdminController@getMateriaFromEstudiante');
 
+//notificaciones
 
-
+Route::post('send-notification', 'ApiAdminController@createNotification');
 // Route::post('emitir_simple',  function (Request $request){
 //     return json_encode(array("result" => "si"));
 // });
