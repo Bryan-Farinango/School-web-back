@@ -644,7 +644,7 @@ class ApiAdminController extends Controller
 
                 );
             }
-            array_push($newArray, $materiaArr);
+            array_push($newArr, $materiaArr);
         }
 
 
