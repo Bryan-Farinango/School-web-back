@@ -610,7 +610,7 @@ class ApiAdminController extends Controller
 
     public function getMateriaFromEstudiante(Request $request){
         $estudiante_id = $request->input('estudiante_id');
-
+        $usuario_id = $request->input('usuario_id');
         $estudiante = Student::find($estudiante_id);
         if ($estudiante == null ){
             return response()->json(
@@ -620,10 +620,39 @@ class ApiAdminController extends Controller
                 ]
             );
         }
+        /*
+         * $newArray = array();
+        foreach ($subjects as $s){
+            $subjectsArray = array(
+                'materia_id' => $s['_id'],
+                'profesor_id' => $s['usuario_id'],
+                'grado_id' => $s['grado_id'],
+                'nombre_asignatura' => $s['nombre_asignatura'],
+
+            );
+            array_push($newArray, $subjectsArray);
+        }
+         */
+        $newArr = array();
+        foreach ( $estudiante->materias as $materia){
+            if ($materia['profesor_id'] == $usuario_id){
+                $materiaArr = array(
+                    'materia_id' => $materia['materia_id'],
+                    'profesor_id' => $materia['profesor_id'],
+                    'grado_id' => $materia['grado_id'],
+                    'nombre_asignatura' => $materia['nombre_asignatura'],
+
+                );
+                array_push($newArray, $materiaArr);
+            }
+        }
+
+
+
         return response()->json(
             [
                 'resultado' => true,
-                'materias' => $estudiante->materias
+                'materias' => $newArr
             ]
         );
 
