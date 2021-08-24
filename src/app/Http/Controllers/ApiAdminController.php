@@ -815,6 +815,7 @@ class ApiAdminController extends Controller
             }
 
             $notificationArray += [
+                'notificacion_id' => $notification['_id'],
                 'notificacion_titulo' => $notification['titulo'],
                 'notificacion_tema' => $notification['tema'],
                 'notificacion_fecha' => $notification['fecha'],
