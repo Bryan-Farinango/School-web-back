@@ -830,4 +830,26 @@ class ApiAdminController extends Controller
             ]
         );
     }
+    public function deleteNotifications(Request $request){
+        $notificacion_id = $request->input('notificacion_id');
+
+        $notificacion = Notification::find($notificacion_id);
+        if ($notificacion_id == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'La notificación no existe'
+                ]
+            );
+        }
+        $notificacion->delete();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Notificación eliminada'
+            ]
+        );
+
+    }
 }

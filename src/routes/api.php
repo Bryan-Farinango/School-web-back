@@ -60,6 +60,7 @@ Route::post('get-materia-de-estudiante', 'ApiAdminController@getMateriaFromEstud
 //notificaciones
 Route::post('send-notification', 'ApiAdminController@createNotification');
 Route::post('get-notification', 'ApiAdminController@getNotifications');
+Route::post('del-notification', 'ApiAdminController@deleteNotifications');
 // Route::post('emitir_simple',  function (Request $request){
 //     return json_encode(array("result" => "si"));
 // });
