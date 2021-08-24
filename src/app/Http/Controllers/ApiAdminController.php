@@ -607,7 +607,6 @@ class ApiAdminController extends Controller
             ]
         );
     }
-
     public function getMateriaFromEstudiante(Request $request){
         $estudiante_id = $request->input('estudiante_id');
         $usuario_id = $request->input('usuario_id');
@@ -753,6 +752,78 @@ class ApiAdminController extends Controller
             [
                 'resultado' => true,
                 'mensaje' => 'Notificación enviada.'
+            ]
+        );
+    }
+
+    //user-apis
+    public function getNotifications(Request $request){
+        $usuario_id = $request->input('usuario_id');
+
+        $notificationes = Notification::where('usuario_id',$usuario_id)->get();
+        $newArr = array();
+
+        foreach ($notificationes as $notification){
+            $notificationArray = array();
+
+            $estudiante = Student::find($notification['estudiante_id']);
+            if ($estudiante != null){
+                $notificationArray += [
+                    "notificacion_nombres" => $estudiante->nombres,
+                    "notificacion_apellidos" => $estudiante->apellidos
+                ];
+            }else{
+                $notificationArray += [
+                    "notificacion_nombres" => "No existe el usuario",
+                    "notificacion_apellidos" => "No existe el usuario"
+                ];
+            }
+
+            $materia = Subject::find($notification['materia_id']);
+            if ($materia != null){
+                $notificationArray += [
+                    "notificacion_materia" => $materia->nombre_asignatura,
+                ];
+                $grado = Grade::find($materia->grado_id);
+                    if  ($grado != null){
+                        $notificationArray += [
+                            "notificacion_grado" => $grado->nombre_grado
+                        ];
+                    }
+                if (isset($materia->usuario_id)){
+                    $profesor = Usuario::find($materia->usuario_id);
+                    if  ($profesor != null){
+                        $notificationArray += [
+                            "notificacion_profesor" => $profesor->nombres
+                        ];
+                    }
+                }else{
+                    $notificationArray += [
+                        "notificacion_profesor" => "no tiene asignado un profesor"
+                    ];
+                }
+
+
+            }else{
+                $notificationArray += [
+                    "notificacion_materia" => "No existe la materia",
+                    "notificacion_grado" => "No existe el grado",
+                    "notificacion_profesor" => "Materia sin Profesor"
+                ];
+            }
+
+            $notificationArray += [
+                'notificacion_titulo' => $notification['titulo'],
+                'notificacion_tema' => $notification['tema'],
+                'notificacion_fecha' => $notification['fecha'],
+                'notificacion_mensaje' => $notification['mensaje']
+            ];
+            array_push($newArr, $notificationArray);
+        }
+        return response()->json(
+            [
+                'resultado' => true,
+                'notificaciones' => $newArr
             ]
         );
     }
