@@ -65,6 +65,9 @@ Route::post('del-notification', 'ApiAdminController@deleteNotifications');
 //     return json_encode(array("result" => "si"));
 // });
 
+//profesor
+Route::post('get-materia-from-teacher', 'ApiAdminController@getSubjectFromGrade');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

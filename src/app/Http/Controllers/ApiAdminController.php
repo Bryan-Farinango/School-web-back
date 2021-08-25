@@ -852,4 +852,46 @@ class ApiAdminController extends Controller
         );
 
     }
+
+    //notas apis
+    public function getSubjectFromGrade(Request $request){
+        $grado_id = $request->input('grado_id');
+        $profesor_id = $request->input('usuario_id');
+
+        $materias = Subject::where('grado_id', $grado_id)->get();
+        if ($materias == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'La Materia no existe.'
+                ]
+            );
+        }
+
+        $newArr = array();
+        foreach ($materias as $materia){
+            $materiaArray = array();
+            if (isset($materia['usuario_id'])){
+                $profesor = Usuario::find($materia['usuario_id']);
+                if ($profesor != null){
+                    if ($profesor->_id == $profesor_id){
+                        $materiaArray += [
+                          "nombre_asignatura" => $materia['nombre_asignatura'],
+                          "asignatura_id" => $materia['_id']
+                        ];
+                    }
+                }
+            }
+            array_push($newArr, $materiaArray);
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'materias' => $newArr
+            ]
+        );
+
+
+    }
 }
