@@ -879,10 +879,11 @@ class ApiAdminController extends Controller
                           "nombre_asignatura" => $materia['nombre_asignatura'],
                           "asignatura_id" => $materia['_id']
                         ];
+                        array_push($newArr, $materiaArray);
                     }
                 }
             }
-            array_push($newArr, $materiaArray);
+
         }
 
         return response()->json(
