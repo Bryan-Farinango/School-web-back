@@ -919,7 +919,8 @@ class ApiAdminController extends Controller
             return response()->json(
                 [
                     'resultado' => false,
-                    'mensaje' => 'El registro para el Quimestre del estudiante ya existe.'
+                    'mensaje' => 'El registro para el Quimestre del estudiante ya existe.',
+                    'onj' => $validation
                 ]
             );
         }
