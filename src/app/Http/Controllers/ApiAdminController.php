@@ -8,6 +8,7 @@ use App\Models\Enums\EstadoFirmaEnum;
 use App\Models\Grade;
 use App\Models\Notification;
 use App\Models\Ruta;
+use App\Models\Score;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Usuario;
@@ -895,4 +896,95 @@ class ApiAdminController extends Controller
 
 
     }
+    public function createNotas(Request $request){
+        $estudiante_id = $request->input('estudiante_id');
+        $grado_id = $request->input('grado_id');
+        $materia_id = $request->input('materia_id');
+        $profesor_id = $request->input('usuario_id');
+        $fecha = $request->input('fecha');
+        $descripcion = $request->input('descripcion');
+        $quimestre = $request->input('quimestre');
+
+        if (empty($estudiante_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'campo estudiante_id requerido.'
+                ]
+            );
+        }
+        if (empty($grado_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'campo grado_id requerido.'
+                ]
+            );
+        }
+        if (empty($materia_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'campo materia_id requerido.'
+                ]
+            );
+        }
+        if (empty($profesor_id)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'campo profesor_id requerido.'
+                ]
+            );
+        }
+        if (empty($fecha)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'campo fecha requerido.'
+                ]
+            );
+        }
+        if (empty($descripcion)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'campo descripcion requerido.'
+                ]
+            );
+        }
+        if (empty($quimestre)){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'campo quimestre requerido.'
+                ]
+            );
+        }
+
+        $parcial = [
+            "nota_1" => "",
+        ];
+
+        $data = [
+            "quimestre" => $quimestre,
+            "descripción" => $descripcion,
+            "fecha_registro" => $fecha,
+            "profesor_id" => $profesor_id,
+            "estudiante_id" => $estudiante_id,
+            "materia_id" => $materia_id,
+            "grado_id" => $grado_id,
+            "primer_parcial" => $parcial
+        ];
+
+        $registroNotas = Score::create($data);
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Registro de calificaciones creado correctamente.'
+            ]
+        );
+    }
+
 }
