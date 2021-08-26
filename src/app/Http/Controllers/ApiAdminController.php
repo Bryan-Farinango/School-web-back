@@ -915,7 +915,7 @@ class ApiAdminController extends Controller
         ];
 
         $validation =  Score::where($dataMatch)->get();
-        if ($validation > 0){
+        if ($validation != null){
             return response()->json(
                 [
                     'resultado' => false,
