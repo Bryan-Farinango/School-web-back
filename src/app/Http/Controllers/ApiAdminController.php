@@ -17,6 +17,7 @@ use App\Models\Proceso;
 use App\Models\Enums\TipoProcesoEnum;
 use App\Models\Firma;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\In;
