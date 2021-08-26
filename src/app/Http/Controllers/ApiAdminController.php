@@ -968,7 +968,7 @@ class ApiAdminController extends Controller
 
         $data = [
             "quimestre" => $quimestre,
-            "descripción" => $descripcion,
+            "descripcion" => $descripcion,
             "fecha_registro" => $fecha,
             "profesor_id" => $profesor_id,
             "estudiante_id" => $estudiante_id,

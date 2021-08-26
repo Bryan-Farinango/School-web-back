@@ -28,11 +28,13 @@ class Score extends Model
         'grado_id',
         'materia_id',
         'usuario_id',
-        'fecha',
+        'fecha_registro',
         'descripcion',
+        'profesor_id',
         'primer_parcial',
         'segundo_parcial',
-        'tercer_parcial'
+        'tercer_parcial',
+        'quimestre'
     ];
 
 }
