@@ -1166,7 +1166,8 @@ class ApiAdminController extends Controller
             [
                 'resultado' => true,
                 'calificaciones' => $newArr,
-                'trajo_algo' => $calificaciones
+                'trajo_algo' => $calificaciones,
+                'data_match' => $dataMatch
             ]
         );
     }
