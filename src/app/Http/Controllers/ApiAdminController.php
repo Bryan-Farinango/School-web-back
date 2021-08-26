@@ -905,6 +905,15 @@ class ApiAdminController extends Controller
         $descripcion = $request->input('descripcion');
         $quimestre = $request->input('quimestre');
 
+        $validation = Score::where('estudiante_id', $estudiante_id)->where('quimestre', $quimestre)->get();
+        if ($validation != null ){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'El registro para el Quimestre del estudiante ya existe.'
+                ]
+            );
+        }
         if (empty($estudiante_id)){
             return response()->json(
                 [
