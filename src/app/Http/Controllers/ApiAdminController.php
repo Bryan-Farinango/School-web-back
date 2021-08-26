@@ -1201,4 +1201,27 @@ class ApiAdminController extends Controller
         );
     }
 
+    public function closeNota(Request $request){
+        $nota_id = $request->input('calificacion_id');
+        $calificaciones = Score::find($nota_id);
+        if ($calificaciones == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'el registro de calificación no existe.'
+                ]
+            );
+        }
+        //estado 2 cerrado
+        $calificaciones->estado = 2;
+        $calificaciones->save();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Registro Cerrado con éxito.'
+            ]
+        );
+
+    }
+
 }
