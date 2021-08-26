@@ -1165,7 +1165,8 @@ class ApiAdminController extends Controller
         return response()->json(
             [
                 'resultado' => true,
-                'calificaciones' => $newArr
+                'calificaciones' => $newArr,
+                'trajo_algo' => $calificaciones
             ]
         );
     }
