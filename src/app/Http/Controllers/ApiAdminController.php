@@ -912,8 +912,7 @@ class ApiAdminController extends Controller
             'usuario_id' => $profesor_id,
             'grado_id' => $grado_id
         ];
-        $validation = Score::where($dataMatch)
-            ->count();
+        $validation = DB::collection('calificaciones')->where($dataMatch)->count();
         if ($validation > 0){
             return response()->json(
                 [
