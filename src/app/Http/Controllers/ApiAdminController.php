@@ -1178,5 +1178,27 @@ class ApiAdminController extends Controller
             ]
         );
     }
+    public function deleteNotas(Request $request){
+        $nota_id = $request->input('calificacion_id');
+
+        $calificaciones = Score::find($nota_id);
+        if ($calificaciones == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'el registro de calificación no existe.'
+                ]
+            );
+        }
+
+        $calificaciones->delete();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'registro borrado correctamente'
+            ]
+        );
+    }
 
 }

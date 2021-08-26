@@ -70,6 +70,7 @@ Route::post('get-materia-from-teacher', 'ApiAdminController@getSubjectFromGrade'
 Route::post('get-materia-from-only-teacher', 'ApiAdminController@getSubjectFromTeacher');
 Route::post('create-registro-notas', 'ApiAdminController@createNotas');
 Route::post('get-notas', 'ApiAdminController@getNotas');
+Route::post('del-notas', 'ApiAdminController@deleteNotas');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
