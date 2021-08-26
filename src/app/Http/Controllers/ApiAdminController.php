@@ -1059,6 +1059,7 @@ class ApiAdminController extends Controller
         $estudiante_id = $request->input('estudiante_id');
         $estado = (integer)$request->input('estado');
         $usuario_id = $request->input('usuario_id');
+        $grado_id = $request->input('grado_id');
 
         $dataMatch = array();
 
@@ -1077,6 +1078,12 @@ class ApiAdminController extends Controller
         if ($estudiante_id != 'todos'){
             $dataMatch += [
                 "estudiante_id" => $estudiante_id
+            ];
+        }
+
+        if ($grado_id != 'todos'){
+            $dataMatch += [
+                "grado_id" => $grado_id
             ];
         }
 
