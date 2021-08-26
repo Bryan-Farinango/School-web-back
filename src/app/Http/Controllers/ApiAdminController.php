@@ -1156,7 +1156,8 @@ class ApiAdminController extends Controller
                     "parcial1" => $calificacion['primer_parcial'],
                     "parcial2" => $calificacion['segundo_parcial'],
                     "parcial3" => $calificacion['tercer_parcial'],
-                    "nota_final" => $calificacion['nota_final']
+                    "nota_final" => $calificacion['nota_final'],
+                    "fecha" => $calificacion['fecha_registro']
 
                 ];
                 array_push($newArr, $calificacionesArray);
