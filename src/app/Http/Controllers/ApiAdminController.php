@@ -905,12 +905,16 @@ class ApiAdminController extends Controller
         $descripcion = $request->input('descripcion');
         $quimestre = $request->input('quimestre');
 
-        $validation = Score::where('estudiante_id', $estudiante_id)->where('quimestre', $quimestre)
-            ->where('materia_id', $materia_id)
-            ->where('usuario_id', $profesor_id)
-            ->where('grado_id', $grado_id)
-            ->get();
-        if ($validation != null ){
+        $dataMatch = [
+            'estudiante_id' => $estudiante_id,
+            'quimestre' => $quimestre,
+            'materia_id' => $materia_id,
+            'usuario_id' => $profesor_id,
+            'grado_id' => $grado_id
+        ];
+        $validation = Score::where($dataMatch)
+            ->count();
+        if ($validation > 0){
             return response()->json(
                 [
                     'resultado' => false,
