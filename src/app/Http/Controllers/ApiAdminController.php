@@ -1055,7 +1055,7 @@ class ApiAdminController extends Controller
     }
     public function getNotas(Request $request){
         $teacherId = $request->input('profesor_id');
-        $materiaId = $request->input('asignatura_id');
+        $materiaId = $request->input('materia_id');
         $estudiante_id = $request->input('estudiante_id');
         $estado = (integer)$request->input('estado');
         $usuario_id = $request->input('usuario_id');
