@@ -999,7 +999,8 @@ class ApiAdminController extends Controller
         return response()->json(
             [
                 'resultado' => true,
-                'mensaje' => 'Registro de calificaciones creado correctamente.'
+                'mensaje' => 'Registro de calificaciones creado correctamente.',
+                'numero' => $validation
             ]
         );
     }
