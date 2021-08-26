@@ -35,7 +35,8 @@ class Score extends Model
         'segundo_parcial',
         'tercer_parcial',
         'quimestre',
-        'estado'
+        'estado',
+        'nota_final'
     ];
 
 }

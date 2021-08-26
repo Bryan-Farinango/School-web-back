@@ -1000,7 +1000,8 @@ class ApiAdminController extends Controller
             "primer_parcial" => $parcial,
             "segundo_parcial" => $parcial,
             "tercer_parcial" => $parcial,
-            "estado" => 1
+            "estado" => 1,
+            "nota_final" => ''
         ];
 
         $registroNotas = Score::create($data);
@@ -1013,7 +1014,6 @@ class ApiAdminController extends Controller
             ]
         );
     }
-
     public function getSubjectFromTeacher(Request $request){
 
         $profesor_id = $request->input('usuario_id');
@@ -1050,6 +1050,40 @@ class ApiAdminController extends Controller
             [
                 'resultado' => true,
                 'materias' => $newArr
+            ]
+        );
+    }
+    public function getNotas(Request $request){
+        $teacherId = $request->input('profesor_id');
+        $materiaId = $request->input('asignatura_id');
+        $gradoId = $request->input('grado_id');
+        $estudiante_id = $request->input('estudiante_id');
+        $estado = (integer)$request->input('estado');
+        $usuario_id = $request->input('usuario_id');
+
+        $dataMatch = array();
+
+        if ($teacherId != 'todos'){
+            $dataMatch += [
+                "profesor_id" => $teacherId
+            ];
+        }
+
+        if ($materiaId != 'todos'){
+            $dataMatch += [
+                "materia_id" => $teacherId
+            ];
+        }
+
+
+
+
+        $students = Student::where($dataMatch)->get();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'estudiantes' => $students
             ]
         );
     }
