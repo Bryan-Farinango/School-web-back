@@ -983,6 +983,12 @@ class ApiAdminController extends Controller
 
         $parcial = [
             "nota_1" => "",
+            "nota_2" => "",
+            "nota_3" => "",
+            "nota_4" => "",
+            "nota_5" => "",
+            "nota_6" => "",
+            "total" => "",
         ];
 
         $data = [
@@ -993,7 +999,10 @@ class ApiAdminController extends Controller
             "estudiante_id" => $estudiante_id,
             "materia_id" => $materia_id,
             "grado_id" => $grado_id,
-            "primer_parcial" => $parcial
+            "primer_parcial" => $parcial,
+            "segundo_parcial" => $parcial,
+            "tercer_parcial" => $parcial,
+            "estado" => 1
         ];
 
         $registroNotas = Score::create($data);

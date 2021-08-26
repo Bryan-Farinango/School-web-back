@@ -34,7 +34,8 @@ class Score extends Model
         'primer_parcial',
         'segundo_parcial',
         'tercer_parcial',
-        'quimestre'
+        'quimestre',
+        'estado'
     ];
 
 }
