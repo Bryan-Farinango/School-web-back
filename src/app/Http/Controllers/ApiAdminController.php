@@ -1223,5 +1223,47 @@ class ApiAdminController extends Controller
         );
 
     }
+    public function getNotaByParcial(Request $request){
+        $calificacion_id = $request->input('estudiante_id');
+        $parcial = $request->input('parcial');
+
+
+        $calificaciones = Score::find($calificacion_id);
+        if ($calificaciones == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'La calificación buscada no existe.'
+                ]
+            );
+        }
+
+        $newArr = array();
+        if ($parcial == 'Parcial 1'){
+            $newArr = [
+                "notas" => $calificaciones->primer_parcial
+            ];
+        }
+
+        if ($parcial == 'Parcial 2'){
+            $newArr = [
+                "notas" => $calificaciones->segundo_parcial
+            ];
+        }
+
+        if ($parcial == 'Parcial 3'){
+            $newArr = [
+                "notas" => $calificaciones->tercer_parcial
+            ];
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                $newArr
+            ]
+        );
+
+    }
 
 }
