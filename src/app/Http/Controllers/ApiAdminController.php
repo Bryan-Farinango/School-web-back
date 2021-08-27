@@ -980,13 +980,13 @@ class ApiAdminController extends Controller
         }
 
         $parcial = [
-            "nota_1" => "",
-            "nota_2" => "",
-            "nota_3" => "",
-            "nota_4" => "",
-            "nota_5" => "",
-            "nota_6" => "",
-            "total" => "",
+            "nota_1" => 0,
+            "nota_2" => 0,
+            "nota_3" => 0,
+            "nota_4" => 0,
+            "nota_5" => 0,
+            "nota_6" => 0,
+            "total" => 0,
         ];
 
         $data = [
@@ -1001,7 +1001,7 @@ class ApiAdminController extends Controller
             "segundo_parcial" => $parcial,
             "tercer_parcial" => $parcial,
             "estado" => 1,
-            "nota_final" => ''
+            "nota_final" => 0
         ];
 
         $registroNotas = Score::create($data);
