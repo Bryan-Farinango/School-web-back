@@ -1241,26 +1241,44 @@ class ApiAdminController extends Controller
         $newArr = array();
         if ($parcial == 'Parcial 1'){
             $newArr = [
-                "notas" => $calificaciones->primer_parcial
+                "nota1" => $calificaciones->primer_parcial->nota_1,
+                "nota2" => $calificaciones->primer_parcial->nota_2,
+                "nota3" => $calificaciones->primer_parcial->nota_3,
+                "nota4" => $calificaciones->primer_parcial->nota_4,
+                "nota5" => $calificaciones->primer_parcial->nota_5,
+                "nota6" => $calificaciones->primer_parcial->nota_6,
+                "total" => $calificaciones->primer_parcial->total,
             ];
         }
 
         if ($parcial == 'Parcial 2'){
             $newArr = [
-                "notas" => $calificaciones->segundo_parcial
+                "nota1" => $calificaciones->segundo_parcial->nota_1,
+                "nota2" => $calificaciones->segundo_parcial->nota_2,
+                "nota3" => $calificaciones->segundo_parcial->nota_3,
+                "nota4" => $calificaciones->segundo_parcial->nota_4,
+                "nota5" => $calificaciones->segundo_parcial->nota_5,
+                "nota6" => $calificaciones->segundo_parcial->nota_6,
+                "total" => $calificaciones->segundo_parcial->total,
             ];
         }
 
         if ($parcial == 'Parcial 3'){
             $newArr = [
-                "notas" => $calificaciones->tercer_parcial
+                "nota1" => $calificaciones->tercer_parcial->nota_1,
+                "nota2" => $calificaciones->tercer_parcial->nota_2,
+                "nota3" => $calificaciones->tercer_parcial->nota_3,
+                "nota4" => $calificaciones->tercer_parcial->nota_4,
+                "nota5" => $calificaciones->tercer_parcial->nota_5,
+                "nota6" => $calificaciones->tercer_parcial->nota_6,
+                "total" => $calificaciones->tercer_parcial->total,
             ];
         }
 
         return response()->json(
             [
                 'resultado' => true,
-                $newArr
+                'calificaciones' => $newArr
             ]
         );
 
