@@ -1305,14 +1305,18 @@ class ApiAdminController extends Controller
             );
         }
         if ($parcial == 'Parcial 1'){
-                $calificaciones->primer_parcial->nota_1 = $nota1;
-                $calificaciones->primer_parcial['nota_2'] = $nota2;
-                $calificaciones->primer_parcial['nota_3'] = $nota3;
-                $calificaciones->primer_parcial['nota_4'] = $nota4;
-                $calificaciones->primer_parcial['nota_5'] = $nota5;
-                $calificaciones->primer_parcial['nota_6'] = $nota6;
-                $calificaciones->primer_parcial['total'] = $total;
-                $calificaciones->save();
+            foreach ($calificaciones->primer_parcial as $cal){
+                $cal->nota_1 = $nota1;
+                $cal->save();
+            }
+//                $calificaciones->primer_parcial['nota_1'] = $nota1;
+//                $calificaciones->primer_parcial['nota_2'] = $nota2;
+//                $calificaciones->primer_parcial['nota_3'] = $nota3;
+//                $calificaciones->primer_parcial['nota_4'] = $nota4;
+//                $calificaciones->primer_parcial['nota_5'] = $nota5;
+//                $calificaciones->primer_parcial['nota_6'] = $nota6;
+//                $calificaciones->primer_parcial['total'] = $total;
+//                $calificaciones->save();
         }
         if ($parcial == 'Parcial 2'){
             $calificaciones->segundo_parcial['nota_1'] = $nota1;
