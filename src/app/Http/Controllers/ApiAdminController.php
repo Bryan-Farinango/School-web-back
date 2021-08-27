@@ -1092,84 +1092,163 @@ class ApiAdminController extends Controller
         ];
 
         //pendiente para el get padres
-//        if ($usuario_id != 'todos'){
-//            $dataMatch += [
-//                "usuario_id" => $usuario_id
-//            ];
-//        }
-        $newArr = array();
-        $calificaciones = Score::where($dataMatch)->get();
+        if ($usuario_id != 'todos'){
+            $newArr = array();
+            $calificaciones = Score::where($dataMatch)->get();
 
-        if ($calificaciones != null){
-            foreach ($calificaciones as $calificacion){
-                $calificacionesArray = array();
+            if ($calificaciones != null){
+                foreach ($calificaciones as $calificacion){
+                    $calificacionesArray = array();
 
-                $estudiante = Student::find($calificacion['estudiante_id']);
-                if ($estudiante != null){
-                    $calificacionesArray += [
-                        "nota_estudiante_nombres" => $estudiante->nombres,
-                        "nota_estudiante_apellidos" => $estudiante->apellidos,
-                        "nota_estudiante_genero" => $estudiante->genero,
-                        "nota_estudiante_jornada" => $estudiante->jornada,
-                    ];
-                }else{
-                    $calificacionesArray += [
-                        "nota_estudiante_nombres" => 'no existe',
-                        "nota_estudiante_apellidos" => 'no existe',
-                        "nota_estudiante_genero" => 'no existe',
-                        "nota_estudiante_jornada" => 'no existe',
-                    ];
+                    $estudiante = Student::find($calificacion['estudiante_id']);
+                    if ($estudiante != null){
+                        if ($estudiante->usuario_id == $usuario_id){
+                            if ($estudiante != null){
+                                $calificacionesArray += [
+                                    "nota_estudiante_nombres" => $estudiante->nombres,
+                                    "nota_estudiante_apellidos" => $estudiante->apellidos,
+                                    "nota_estudiante_genero" => $estudiante->genero,
+                                    "nota_estudiante_jornada" => $estudiante->jornada,
+                                ];
+                            }else{
+                                $calificacionesArray += [
+                                    "nota_estudiante_nombres" => 'no existe',
+                                    "nota_estudiante_apellidos" => 'no existe',
+                                    "nota_estudiante_genero" => 'no existe',
+                                    "nota_estudiante_jornada" => 'no existe',
+                                ];
+                            }
+
+                            $grado = Grade::find($calificacion['grado_id']);
+                            if ($grado != null){
+                                $calificacionesArray += [
+                                    "nota_estudiante_grado" => $grado->nombre_grado,
+                                ];
+                            }else{
+                                $calificacionesArray += [
+                                    "nota_estudiante_grado" => 'no existe',
+                                ];
+                            }
+
+                            $materia = Subject::find($calificacion['materia_id']);
+                            if ($materia != null){
+                                $calificacionesArray += [
+                                    "nota_estudiante_nombre_asignatura" => $materia->nombre_asignatura,
+                                ];
+                            }else{
+                                $calificacionesArray += [
+                                    "nota_estudiante_nombre_asignatura" => 'no existe',
+                                ];
+                            }
+
+                            $profesor = Usuario::find($calificacion['profesor_id']);
+                            if ($profesor != null){
+                                $calificacionesArray += [
+                                    "nota_estudiante_nombres_profesor" => $profesor->nombres,
+                                    "nota_estudiante_apellidos_profesor" => $profesor->apellidos,
+                                ];
+                            }else{
+                                $calificacionesArray += [
+                                    "nota_estudiante_nombres_profesor" => 'no existe',
+                                    "nota_estudiante_apellidos_profesor" => 'no existe',
+                                ];
+                            }
+
+                            $calificacionesArray += [
+                                "nota_estudiante_quimestre" => $calificacion['quimestre'],
+                                "nota_estudiante_descripcion" => $calificacion['descripcion'],
+                                "nota_estudiante_id" => $calificacion['_id'],
+                                "parcial1" => $calificacion['primer_parcial'],
+                                "parcial2" => $calificacion['segundo_parcial'],
+                                "parcial3" => $calificacion['tercer_parcial'],
+                                "nota_final" => $calificacion['nota_final'],
+                                "fecha" => $calificacion['fecha_registro']
+
+                            ];
+                            array_push($newArr, $calificacionesArray);
+                        }
+                    }
+
+
                 }
+            }
+        }else{
+            $newArr = array();
+            $calificaciones = Score::where($dataMatch)->get();
 
-                $grado = Grade::find($calificacion['grado_id']);
-                if ($grado != null){
+            if ($calificaciones != null){
+                foreach ($calificaciones as $calificacion){
+                    $calificacionesArray = array();
+
+                    $estudiante = Student::find($calificacion['estudiante_id']);
+
+                    if ($estudiante != null){
+                        $calificacionesArray += [
+                            "nota_estudiante_nombres" => $estudiante->nombres,
+                            "nota_estudiante_apellidos" => $estudiante->apellidos,
+                            "nota_estudiante_genero" => $estudiante->genero,
+                            "nota_estudiante_jornada" => $estudiante->jornada,
+                        ];
+                    }else{
+                        $calificacionesArray += [
+                            "nota_estudiante_nombres" => 'no existe',
+                            "nota_estudiante_apellidos" => 'no existe',
+                            "nota_estudiante_genero" => 'no existe',
+                            "nota_estudiante_jornada" => 'no existe',
+                        ];
+                    }
+
+                    $grado = Grade::find($calificacion['grado_id']);
+                    if ($grado != null){
+                        $calificacionesArray += [
+                            "nota_estudiante_grado" => $grado->nombre_grado,
+                        ];
+                    }else{
+                        $calificacionesArray += [
+                            "nota_estudiante_grado" => 'no existe',
+                        ];
+                    }
+
+                    $materia = Subject::find($calificacion['materia_id']);
+                    if ($materia != null){
+                        $calificacionesArray += [
+                            "nota_estudiante_nombre_asignatura" => $materia->nombre_asignatura,
+                        ];
+                    }else{
+                        $calificacionesArray += [
+                            "nota_estudiante_nombre_asignatura" => 'no existe',
+                        ];
+                    }
+
+                    $profesor = Usuario::find($calificacion['profesor_id']);
+                    if ($profesor != null){
+                        $calificacionesArray += [
+                            "nota_estudiante_nombres_profesor" => $profesor->nombres,
+                            "nota_estudiante_apellidos_profesor" => $profesor->apellidos,
+                        ];
+                    }else{
+                        $calificacionesArray += [
+                            "nota_estudiante_nombres_profesor" => 'no existe',
+                            "nota_estudiante_apellidos_profesor" => 'no existe',
+                        ];
+                    }
+
                     $calificacionesArray += [
-                        "nota_estudiante_grado" => $grado->nombre_grado,
+                        "nota_estudiante_quimestre" => $calificacion['quimestre'],
+                        "nota_estudiante_descripcion" => $calificacion['descripcion'],
+                        "nota_estudiante_id" => $calificacion['_id'],
+                        "parcial1" => $calificacion['primer_parcial'],
+                        "parcial2" => $calificacion['segundo_parcial'],
+                        "parcial3" => $calificacion['tercer_parcial'],
+                        "nota_final" => $calificacion['nota_final'],
+                        "fecha" => $calificacion['fecha_registro']
+
                     ];
-                }else{
-                    $calificacionesArray += [
-                        "nota_estudiante_grado" => 'no existe',
-                    ];
+                    array_push($newArr, $calificacionesArray);
                 }
-
-                $materia = Subject::find($calificacion['materia_id']);
-                if ($materia != null){
-                    $calificacionesArray += [
-                        "nota_estudiante_nombre_asignatura" => $materia->nombre_asignatura,
-                    ];
-                }else{
-                    $calificacionesArray += [
-                        "nota_estudiante_nombre_asignatura" => 'no existe',
-                    ];
-                }
-
-                $profesor = Usuario::find($calificacion['profesor_id']);
-                if ($profesor != null){
-                    $calificacionesArray += [
-                        "nota_estudiante_nombres_profesor" => $profesor->nombres,
-                        "nota_estudiante_apellidos_profesor" => $profesor->apellidos,
-                    ];
-                }else{
-                    $calificacionesArray += [
-                        "nota_estudiante_nombres_profesor" => 'no existe',
-                        "nota_estudiante_apellidos_profesor" => 'no existe',
-                    ];
-                }
-
-                $calificacionesArray += [
-                    "nota_estudiante_quimestre" => $calificacion['quimestre'],
-                    "nota_estudiante_descripcion" => $calificacion['descripcion'],
-                    "nota_estudiante_id" => $calificacion['_id'],
-                    "parcial1" => $calificacion['primer_parcial'],
-                    "parcial2" => $calificacion['segundo_parcial'],
-                    "parcial3" => $calificacion['tercer_parcial'],
-                    "nota_final" => $calificacion['nota_final'],
-                    "fecha" => $calificacion['fecha_registro']
-
-                ];
-                array_push($newArr, $calificacionesArray);
             }
         }
+
 
         return response()->json(
             [
