@@ -1262,7 +1262,9 @@ class ApiAdminController extends Controller
             [
                 'resultado' => true,
                 'calificaciones' => $newArr,
-                'datamatch' => $dataMatch
+                'datamatch' => $dataMatch,
+                'val1' => empty($dataMatch),
+
             ]
         );
     }
