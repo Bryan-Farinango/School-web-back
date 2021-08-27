@@ -1318,23 +1318,27 @@ class ApiAdminController extends Controller
 
         }
         if ($parcial == 'Parcial 2'){
-            $calificaciones->segundo_parcial['nota_1'] = $nota1;
-            $calificaciones->segundo_parcial['nota_2'] = $nota2;
-            $calificaciones->segundo_parcial['nota_3'] = $nota3;
-            $calificaciones->segundo_parcial['nota_4'] = $nota4;
-            $calificaciones->segundo_parcial['nota_5'] = $nota5;
-            $calificaciones->segundo_parcial['nota_6'] = $nota6;
-            $calificaciones->segundo_parcial['total'] = $total;
+            $aux = $calificaciones->segundo_parcial;
+            $aux['nota_1'] = $nota1;
+            $aux['nota_2'] = $nota2;
+            $aux['nota_3'] = $nota3;
+            $aux['nota_4'] = $nota4;
+            $aux['nota_5'] = $nota5;
+            $aux['nota_6'] = $nota6;
+            $aux['total'] = $total;
+            $calificaciones->segundo_parcial = $aux;
             $calificaciones->save();
         }
         if ($parcial == 'Parcial 3'){
-            $calificaciones->tercer_parcial['nota_1'] = $nota1;
-            $calificaciones->tercer_parcial['nota_2'] = $nota2;
-            $calificaciones->tercer_parcial['nota_3'] = $nota3;
-            $calificaciones->tercer_parcial['nota_4'] = $nota4;
-            $calificaciones->tercer_parcial['nota_5'] = $nota5;
-            $calificaciones->tercer_parcial['nota_6'] = $nota6;
-            $calificaciones->tercer_parcial['total'] = $total;
+            $aux = $calificaciones->tercer_parcial;
+            $aux['nota_1'] = $nota1;
+            $aux['nota_2'] = $nota2;
+            $aux['nota_3'] = $nota3;
+            $aux['nota_4'] = $nota4;
+            $aux['nota_5'] = $nota5;
+            $aux['nota_6'] = $nota6;
+            $aux['total'] = $total;
+            $calificaciones->tercer_parcial = $aux;
             $calificaciones->save();
         }
 
