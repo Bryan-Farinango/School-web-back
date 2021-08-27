@@ -1093,6 +1093,11 @@ class ApiAdminController extends Controller
             ];
         }
 
+        if ($usuario_id != 'todos'){
+            $dataMatch += [
+                "usuario_id" => $usuario_id
+            ];
+        }
 
         //pendiente para el get padres
         if ($usuario_id != 'todos'){
