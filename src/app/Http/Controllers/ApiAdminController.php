@@ -1284,4 +1284,64 @@ class ApiAdminController extends Controller
 
     }
 
+    public function updateNota(Request $request){
+        $calificacion_id = $request->input('calificacion_id');
+        $parcial = $request->input('parcial');
+        $nota1 = $request->input('nota_1');
+        $nota2 = $request->input('nota_2');
+        $nota3 = $request->input('nota_3');
+        $nota4 = $request->input('nota_4');
+        $nota5 = $request->input('nota_5');
+        $nota6 = $request->input('nota_6');
+        $total = $request->input('total');
+
+        $calificaciones = Score::find($calificacion_id);
+        if ($calificaciones == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'La calificación buscada no existe.'
+                ]
+            );
+        }
+        if ($parcial == 'Parcial 1'){
+                $calificaciones->primer_parcial['nota_1'] = $nota1;
+                $calificaciones->primer_parcial['nota_2'] = $nota2;
+                $calificaciones->primer_parcial['nota_3'] = $nota3;
+                $calificaciones->primer_parcial['nota_4'] = $nota4;
+                $calificaciones->primer_parcial['nota_5'] = $nota5;
+                $calificaciones->primer_parcial['nota_6'] = $nota6;
+                $calificaciones->primer_parcial['total'] = $total;
+                $calificaciones->save();
+        }
+        if ($parcial == 'Parcial 2'){
+            $calificaciones->segundo_parcial['nota_1'] = $nota1;
+            $calificaciones->segundo_parcial['nota_2'] = $nota2;
+            $calificaciones->segundo_parcial['nota_3'] = $nota3;
+            $calificaciones->segundo_parcial['nota_4'] = $nota4;
+            $calificaciones->segundo_parcial['nota_5'] = $nota5;
+            $calificaciones->segundo_parcial['nota_6'] = $nota6;
+            $calificaciones->segundo_parcial['total'] = $total;
+            $calificaciones->save();
+        }
+        if ($parcial == 'Parcial 3'){
+            $calificaciones->tercer_parcial['nota_1'] = $nota1;
+            $calificaciones->tercer_parcial['nota_2'] = $nota2;
+            $calificaciones->tercer_parcial['nota_3'] = $nota3;
+            $calificaciones->tercer_parcial['nota_4'] = $nota4;
+            $calificaciones->tercer_parcial['nota_5'] = $nota5;
+            $calificaciones->tercer_parcial['nota_6'] = $nota6;
+            $calificaciones->tercer_parcial['total'] = $total;
+            $calificaciones->save();
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Notas actualizadas.'
+            ]
+        );
+
+
+    }
 }

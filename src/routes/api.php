@@ -73,6 +73,7 @@ Route::post('get-notas', 'ApiAdminController@getNotas');
 Route::post('del-notas', 'ApiAdminController@deleteNotas');
 Route::post('close-notas', 'ApiAdminController@closeNota');
 Route::post('get-notas-by-parcial', 'ApiAdminController@getNotaByParcial');
+Route::post('update-notas', 'ApiAdminController@updateNota');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
