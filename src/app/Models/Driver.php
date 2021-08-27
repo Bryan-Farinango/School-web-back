@@ -21,7 +21,7 @@ class Driver extends Model
 {
     use HasFactory;
 
-    protected $collection = 'transportistas';
+    protected $collection = 'transporte';
 
     protected $fillable = [
         'nombres',
