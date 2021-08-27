@@ -1306,7 +1306,7 @@ class ApiAdminController extends Controller
         }
         if ($parcial == 'Parcial 1'){
             foreach ($calificaciones->primer_parcial as $cal){
-                $cal['nota_1'] = $nota1;
+                $cal[0] = $nota1;
 
             }
             $calificaciones->save();
