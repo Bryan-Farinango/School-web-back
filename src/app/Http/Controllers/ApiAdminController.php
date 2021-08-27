@@ -1241,13 +1241,13 @@ class ApiAdminController extends Controller
         $newArr = array();
         if ($parcial == 'Parcial 1'){
             $newArr = [
-                "nota1" => $calificaciones->primer_parcial->nota_1,
-                "nota2" => $calificaciones->primer_parcial->nota_2,
-                "nota3" => $calificaciones->primer_parcial->nota_3,
-                "nota4" => $calificaciones->primer_parcial->nota_4,
-                "nota5" => $calificaciones->primer_parcial->nota_5,
-                "nota6" => $calificaciones->primer_parcial->nota_6,
-                "total" => $calificaciones->primer_parcial->total,
+                "nota1" => $calificaciones->primer_parcial['nota_1'],
+                "nota2" => $calificaciones->primer_parcial['nota_2'],
+                "nota3" => $calificaciones->primer_parcial['nota_3'],
+                "nota4" => $calificaciones->primer_parcial['nota_4'],
+                "nota5" => $calificaciones->primer_parcial['nota_5'],
+                "nota6" => $calificaciones->primer_parcial['nota_6'],
+                "total" => $calificaciones->primer_parcial['total'],
             ];
         }
 
