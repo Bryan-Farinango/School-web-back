@@ -1087,9 +1087,12 @@ class ApiAdminController extends Controller
             ];
         }
 
-        $dataMatch += [
-            "estado" => $estado
-        ];
+        if ($estado != 'todos'){
+            $dataMatch += [
+                "estado" => $estado
+            ];
+        }
+
 
         //pendiente para el get padres
         if ($usuario_id != 'todos'){
