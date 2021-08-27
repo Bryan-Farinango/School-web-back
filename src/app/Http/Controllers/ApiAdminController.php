@@ -1098,7 +1098,11 @@ class ApiAdminController extends Controller
         //pendiente para el get padres
         if ($usuario_id != 'todos'){
             $newArr = array();
-            $calificaciones = Score::where($dataMatch)->get();
+            if ( $dataMatch == ''){
+                $calificaciones = Score::all();
+            }else{
+                $calificaciones = Score::where($dataMatch)->get();
+            }
 
             if ($calificaciones != null){
                 foreach ($calificaciones as $calificacion){
