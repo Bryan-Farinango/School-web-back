@@ -1241,37 +1241,37 @@ class ApiAdminController extends Controller
         $newArr = array();
         if ($parcial == 'Parcial 1'){
             $newArr = [
-                "nota1" => $calificaciones->primer_parcial['nota_1'],
-                "nota2" => $calificaciones->primer_parcial['nota_2'],
-                "nota3" => $calificaciones->primer_parcial['nota_3'],
-                "nota4" => $calificaciones->primer_parcial['nota_4'],
-                "nota5" => $calificaciones->primer_parcial['nota_5'],
-                "nota6" => $calificaciones->primer_parcial['nota_6'],
-                "total" => $calificaciones->primer_parcial['total'],
+                "nota1" => (integer)$calificaciones->primer_parcial['nota_1'],
+                "nota2" => (integer)$calificaciones->primer_parcial['nota_2'],
+                "nota3" => (integer)$calificaciones->primer_parcial['nota_3'],
+                "nota4" => (integer)$calificaciones->primer_parcial['nota_4'],
+                "nota5" => (integer)$calificaciones->primer_parcial['nota_5'],
+                "nota6" => (integer)$calificaciones->primer_parcial['nota_6'],
+                "total" => (integer)$calificaciones->primer_parcial['total'],
             ];
         }
 
         if ($parcial == 'Parcial 2'){
             $newArr = [
-                "nota1" => $calificaciones->segundo_parcial['nota_1'],
-                "nota2" => $calificaciones->segundo_parcial['nota_2'],
-                "nota3" => $calificaciones->segundo_parcial['nota_3'],
-                "nota4" => $calificaciones->segundo_parcial['nota_4'],
-                "nota5" => $calificaciones->segundo_parcial['nota_5'],
-                "nota6" => $calificaciones->segundo_parcial['nota_6'],
-                "total" => $calificaciones->segundo_parcial['total'],
+                "nota1" => (integer)$calificaciones->segundo_parcial['nota_1'],
+                "nota2" => (integer)$calificaciones->segundo_parcial['nota_2'],
+                "nota3" => (integer)$calificaciones->segundo_parcial['nota_3'],
+                "nota4" => (integer)$calificaciones->segundo_parcial['nota_4'],
+                "nota5" => (integer)$calificaciones->segundo_parcial['nota_5'],
+                "nota6" => (integer)$calificaciones->segundo_parcial['nota_6'],
+                "total" => (integer)$calificaciones->segundo_parcial['total'],
             ];
         }
 
         if ($parcial == 'Parcial 3'){
             $newArr = [
-                "nota1" => $calificaciones->tercer_parcial['nota_1'],
-                "nota2" => $calificaciones->tercer_parcial['nota_2'],
-                "nota3" => $calificaciones->tercer_parcial['nota_3'],
-                "nota4" => $calificaciones->tercer_parcial['nota_4'],
-                "nota5" => $calificaciones->tercer_parcial['nota_5'],
-                "nota6" => $calificaciones->tercer_parcial['nota_6'],
-                "total" => $calificaciones->tercer_parcial['total'],
+                "nota1" => (integer)$calificaciones->tercer_parcial['nota_1'],
+                "nota2" => (integer)$calificaciones->tercer_parcial['nota_2'],
+                "nota3" => (integer)$calificaciones->tercer_parcial['nota_3'],
+                "nota4" => (integer)$calificaciones->tercer_parcial['nota_4'],
+                "nota5" => (integer)$calificaciones->tercer_parcial['nota_5'],
+                "nota6" => (integer)$calificaciones->tercer_parcial['nota_6'],
+                "total" => (integer)$calificaciones->tercer_parcial['total'],
             ];
         }
 
