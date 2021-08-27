@@ -1351,4 +1351,28 @@ class ApiAdminController extends Controller
 
 
     }
+
+    public function updateQuimes(Request $request){
+        $calificacion_id = $request->input('calificacion_id');
+        $nota = $request->input('nota_final');
+        $calificaciones = Score::find($calificacion_id);
+        if ($calificaciones == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'La calificación buscada no existe.'
+                ]
+            );
+        }
+
+        $calificaciones->nota_final = $nota;
+        $calificaciones->save();
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Nota final Actualizada.'
+            ]
+        );
+    }
 }
