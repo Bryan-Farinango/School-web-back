@@ -1465,4 +1465,39 @@ class ApiAdminController extends Controller
             ]
         );
     }
+
+
+    //transporte
+    public function getMovilInfo(Request $request){
+        $usuario_id = $request->input('usuario_id');
+
+        $usuarios = Usuario::find($usuario_id);
+        if  ($usuarios == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'El usuario no existe'
+                ]
+            );
+        }
+
+        $email = $usuarios->email;
+        $user_exist = false;
+
+        $movil_users = Driver::where('email', $email);
+        if ($movil_users != null){
+            $user_exist = true;
+        }
+
+        $obj = [
+            "usuario_existe" => $user_exist
+        ];
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'objeto' => $obj
+            ]
+        );
+    }
 }
