@@ -1484,8 +1484,8 @@ class ApiAdminController extends Controller
         $email = $usuarios->email;
         $user_exist = false;
 
-        $movil_users = Driver::where('email', $email);
-        if ($movil_users != null){
+        $movil_users = Driver::where('email', $email)->count();
+        if ($movil_users > 0 ){
             $user_exist = true;
         }
 
