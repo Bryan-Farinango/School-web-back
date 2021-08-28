@@ -202,7 +202,8 @@ class ApiAdminController extends Controller
             'sector_1' => $sector1,
             'sector_2' => $sector2,
             'sector_3' => $sector3,
-            'transportista_id' => $transportistaId
+            'transportista_id' => $transportistaId,
+            'estado' => 0
         ];
 
         $rutaValidation = Ruta::where('numero_ruta', $numeroRuta)
