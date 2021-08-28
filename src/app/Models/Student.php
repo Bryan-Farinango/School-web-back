@@ -34,7 +34,8 @@ class Student extends Model
         'nombre_grado',
         'jornada',
         'usuario_id',
-        'estado'
+        'estado',
+        'transporte'
     ];
 
     /*
