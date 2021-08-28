@@ -52,6 +52,7 @@ Route::post('del-solicitud-estudiante', 'ApiRegisterController@deleteSolicitudEs
 Route::post('get-solicitud-estudiante', 'ApiAdminController@getAllStudents');
 Route::post('aprobar-estudiante', 'ApiAdminController@aprobarEstudiante');
 Route::post('rechazar-estudiante', 'ApiAdminController@rechazarEstudiante');
+Route::post('get-estudiante-transporte', 'ApiAdminController@getStudentTransporte');
 
 Route::post('get-my-estudiante', 'ApiAdminController@getMyStudents');
 Route::post('get-my-subject', 'ApiSubjectsController@getMySubjects');

@@ -1500,4 +1500,31 @@ class ApiAdminController extends Controller
             ]
         );
     }
+    public function getStudentTransporte(Request $request){
+        $usuario_id = $request->input('usuario_id');
+        $dataMatch = [
+            "usuario_id" => $usuario_id,
+            "transporte" => true
+        ];
+        $estudiantes = Student::where($dataMatch)->get();
+
+        if ($estudiantes == null ){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'Aún no tiene estudiantes Matriculados.'
+                ]
+            );
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'estudiantes' => $estudiantes
+            ]
+        );
+
+
+
+    }
 }
