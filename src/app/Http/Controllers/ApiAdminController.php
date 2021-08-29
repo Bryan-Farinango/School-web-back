@@ -1528,4 +1528,47 @@ class ApiAdminController extends Controller
 
 
     }
+    public function matricularTransporte(Request $request){
+        //matricular
+
+        $estudiante_id = $request->input('estudiante_id');
+        $ruta_id = $request->input('ruta_id');
+
+        $rutas = Ruta::find($ruta_id);
+        if  ($rutas == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'La ruta no existe'
+                ]
+            );
+        }
+
+        $estudiantes = Student::find($estudiante_id);
+        if ($estudiantes == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'El estudiante no existe'
+                ]
+            );
+        }
+
+        $newArray = array(
+            'estudiante_id' => $estudiantes->_id,
+            'estado' => 1,
+        );
+
+        $rutas->push(
+            'matriculas', $newArray
+        );
+
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Estudiante Matriculado en el transporte'
+            ]
+        );
+    }
 }

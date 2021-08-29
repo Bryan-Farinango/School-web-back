@@ -31,7 +31,8 @@ class Ruta extends Model
         'sector_2',
         'sector_3',
         'transportista_id',
-        'estado'
+        'estado',
+        'matriculas'
     ];
 
 
