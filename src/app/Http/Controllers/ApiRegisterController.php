@@ -975,7 +975,12 @@ class ApiRegisterController extends Controller
                             "matricula_nombres" => $student->nombres,
                             "matricula_apellidos" => $student->apellidos,
                           ];
-                        array_push($arrayRutas, $arrayMatricula);
+
+                        $tmpArr = [
+                            "inscritos" => $arrayMatricula,
+                        ];
+
+                        array_push($arrayRutas, $tmpArr);
                     }
 
                 }

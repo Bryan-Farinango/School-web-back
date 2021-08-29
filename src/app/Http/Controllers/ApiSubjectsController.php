@@ -287,9 +287,6 @@ class ApiSubjectsController extends Controller
 
         $materias =  Subject::all();
         $getMaterias = array();
-        $getMaterias +=[
-            "inscritos" => ''
-        ];
         foreach ($materias as $r){
             $gradeName = Grade::where('_id', $r['grado_id'])
                 ->orderBy("created_at", "desc")
@@ -301,10 +298,7 @@ class ApiSubjectsController extends Controller
                 'nombre_grado' => $gradeName['nombre_grado'],
                 'materia_id' => $r['_id']
             );
-            $tmpArr = [
-                "inscritos" => $materiasArray,
-            ];
-            array_merge($getMaterias, $tmpArr);
+            array_push($getMaterias, $materiasArray);
         }
 
 
