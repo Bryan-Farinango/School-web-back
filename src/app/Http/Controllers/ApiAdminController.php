@@ -1563,6 +1563,8 @@ class ApiAdminController extends Controller
             'matriculas', $newArray
         );
 
+        $estudiantes->transporte = true;
+        $estudiantes->save();
 
         return response()->json(
             [
