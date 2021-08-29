@@ -966,6 +966,20 @@ class ApiRegisterController extends Controller
         $newArr = array();
         foreach ($rutas as $r){
             $arrayRutas = array();
+            if  (isset($r['matriculas'])){
+                foreach ($r['matriculas'] as $matricula){
+                    $arrayMatricula = array();
+                    $student = Student::find($matricula['estudiante_id']);
+                    if ($student != null){
+                        $arrayMatricula += [
+                            "matricula_nombres" => $student->nombres,
+                            "matricula_apellidos" => $student->apellidos,
+                          ];
+                        array_push($arrayRutas, $arrayMatricula);
+                    }
+
+                }
+            }
             $drivers = Driver::find($r['transportista_id']);
             if ($drivers != null){
                 $arrayRutas += [
