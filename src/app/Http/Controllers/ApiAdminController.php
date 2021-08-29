@@ -1504,7 +1504,7 @@ class ApiAdminController extends Controller
         $usuario_id = $request->input('usuario_id');
         $dataMatch = [
             "usuario_id" => $usuario_id,
-            "transporte" => true,
+            "transporte" => false,
             "estado" => 1
         ];
         $estudiantes = Student::where($dataMatch)->get();
