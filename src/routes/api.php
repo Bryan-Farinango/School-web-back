@@ -45,6 +45,7 @@ Route::post('delete-driver-from-ruta', 'ApiAdminController@deleteDriver');
 Route::post('add-driver-to-ruta', 'ApiAdminController@addDriver');
 Route::post('update-rutas', 'ApiAdminController@updateAllDriver');
 Route::post('delete-rutas', 'ApiAdminController@deleteRuta');
+Route::post('get-rutas-for-user', 'ApiAdminController@getRutasforUser');
 //estudiantes
 Route::post('add-estudiantes', 'ApiRegisterController@estudiantes');
 Route::post('get-estudiantes', 'ApiRegisterController@getEstudiantesInfo');

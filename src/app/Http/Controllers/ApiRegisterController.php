@@ -937,4 +937,62 @@ class ApiRegisterController extends Controller
             ]
         );
     }
+    public function getRutasforUser(Request $request){
+        $apiKey = $request->input('api_key_admin');
+
+        if ( config('app.api_key_admin') != $apiKey){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No tienes permisos de administrador para consultar los grados.'
+                ]
+            );
+        }
+
+        $dataMatch = [
+            "estado" => 1,
+        ];
+
+        $rutas = Ruta::where($dataMatch)->get();
+        if ($rutas == null){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No existen rutas dispobibles aún.'
+                ]
+            );
+        }
+
+        $newArr = array();
+        foreach ($rutas as $r){
+            $arrayRutas = array();
+            $drivers = Driver::find($r['transportista_id']);
+            if ($drivers != null){
+                $arrayRutas += [
+                    "transportista_id" => $drivers->_id,
+                    "transportista_nombres" => $drivers->nombres,
+                    "transportista_apellidos" => $drivers->apellidos,
+                    "transportista_email" => $drivers->email,
+                    "transportista_telefono" => $drivers->telefono,
+                    "transportista_experiencia" => $drivers->experiencia_laboral,
+                    "transportista_capacidad" => $drivers->capacidad,
+                    "ruta_id" => $r['_id'],
+                    "ruta_titulo" => $r['titulo_ruta'],
+                    "ruta_numero" => $r['numero_ruta'],
+                    "ruta_ciudad" => $r['ciudad'],
+                    "ruta_sector1" => $r['sector_1'],
+                    "ruta_sector2" => $r['sector_2'],
+                    "ruta_sector3" => $r['sector_3'],
+                ];
+                array_push($newArr, $arrayRutas);
+            }
+        }
+        return response()->json(
+            [
+                'resultado' => true,
+                'rutas' => $newArr
+            ]
+        );
+
+    }
 }
