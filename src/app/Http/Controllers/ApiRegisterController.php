@@ -1003,13 +1003,11 @@ class ApiRegisterController extends Controller
             }
         }
 
-        $newArr += [
-            "inscritos" => $newArrMatricula
-        ];
         return response()->json(
             [
                 'resultado' => true,
-                'rutas' => $newArr
+                'rutas' => $newArr,
+                'inscritos' => $newArrMatricula
             ]
         );
 
