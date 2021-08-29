@@ -964,6 +964,7 @@ class ApiRegisterController extends Controller
         }
 
         $newArr = array();
+        $newArrMatricula = array();
         foreach ($rutas as $r){
             $arrayRutas = array();
             if  (isset($r['matriculas'])){
@@ -975,12 +976,7 @@ class ApiRegisterController extends Controller
                             "matricula_nombres" => $student->nombres,
                             "matricula_apellidos" => $student->apellidos,
                           ];
-
-                        $tmpArr = [
-                            "inscritos" => $arrayMatricula,
-                        ];
-
-                        array_push($arrayRutas, $tmpArr);
+                        array_push($newArrMatricula, $arrayMatricula);
                     }
 
                 }
@@ -1006,6 +1002,10 @@ class ApiRegisterController extends Controller
                 array_push($newArr, $arrayRutas);
             }
         }
+
+        $newArr += [
+            "inscritos" => $newArrMatricula
+        ];
         return response()->json(
             [
                 'resultado' => true,
