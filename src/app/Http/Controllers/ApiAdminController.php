@@ -1613,4 +1613,33 @@ class ApiAdminController extends Controller
             ]
         );
     }
+
+    public function loginUserMobile(Request $request){
+        $email = $request->input('email');
+
+        $userMobile = Driver::where('email', $email)->get()->first();
+        $arr = array();
+        if ($userMobile != null){
+            if (isset($userMobile->web_user_id)){
+                $arr += [
+                  "usuario_id" => $userMobile->web_user_id,
+                  "user_web" => true,
+                  "email" => $userMobile->email
+                ];
+            }else{
+                $arr += [
+                    "usuario_id" => '',
+                    "user_web" => true,
+                    "email" => $userMobile->email
+                ];
+            }
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Consulta Correcta.'
+            ]
+        );
+    }
 }

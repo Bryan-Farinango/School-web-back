@@ -80,6 +80,7 @@ Route::post('matricula-transporte', 'ApiAdminController@matricularTransporte');
 //movile
 Route::post('get-user-movile-info', 'ApiAdminController@getMovilInfo');
 Route::post('add-mobile-user', 'ApiAdminController@registerUserMobile');
+Route::post('get-mobile-user-info', 'ApiAdminController@loginUserMobile');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
