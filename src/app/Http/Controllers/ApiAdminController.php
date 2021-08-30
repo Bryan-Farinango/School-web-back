@@ -1573,4 +1573,43 @@ class ApiAdminController extends Controller
             ]
         );
     }
+
+    //mobile
+    public function registerUserMobile(Request $request){
+        $email = $request->input('email');
+        $name = $request->input('name');
+
+        $dataSave = array();
+        $web_usuarios = Usuario::where('email', $email)->get();
+        if ($web_usuarios != null){
+            $dataSave += [
+                "web_user_id" => $web_usuarios->_id,
+                "telefono" => $web_usuarios->telefono
+            ];
+        }
+        $dataSave += [
+            "email" => $email,
+            "name" => $name,
+        ];
+
+
+        try {
+            $driverAccount = Driver::create($dataSave);
+        }catch (Exception $e){
+            return response()->json(
+                [
+                    'resultado' => false,
+                    'mensaje' => 'No se pudo crear el transportista.'
+                ]
+            );
+        }
+
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Usuario creado correctamente.'
+            ]
+        );
+    }
 }

@@ -63,9 +63,6 @@ Route::post('get-materia-de-estudiante', 'ApiAdminController@getMateriaFromEstud
 Route::post('send-notification', 'ApiAdminController@createNotification');
 Route::post('get-notification', 'ApiAdminController@getNotifications');
 Route::post('del-notification', 'ApiAdminController@deleteNotifications');
-// Route::post('emitir_simple',  function (Request $request){
-//     return json_encode(array("result" => "si"));
-// });
 
 //profesor
 Route::post('get-materia-from-teacher', 'ApiAdminController@getSubjectFromGrade');
@@ -80,9 +77,9 @@ Route::post('update-nota-final', 'ApiAdminController@updateQuimes');
 
 Route::post('matricula-transporte', 'ApiAdminController@matricularTransporte');
 
-
 //movile
 Route::post('get-user-movile-info', 'ApiAdminController@getMovilInfo');
+Route::post('add-mobile-user', 'ApiAdminController@registerUserMobile');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

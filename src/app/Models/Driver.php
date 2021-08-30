@@ -33,7 +33,10 @@ class Driver extends Model
         'experiencia_laboral',
         'password',
         'temporal_password',
-        'firebase_uid'
+        'firebase_uid',
+        'web_user_id',
+        'name',
+
     ];
 
 
