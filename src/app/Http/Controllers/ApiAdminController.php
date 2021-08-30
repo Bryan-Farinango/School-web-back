@@ -1580,7 +1580,7 @@ class ApiAdminController extends Controller
         $name = $request->input('name');
 
         $dataSave = array();
-        $web_usuarios = Usuario::where('email', $email)->get();
+        $web_usuarios = Usuario::where('email', $email)->get()->first();
         if ($web_usuarios != null){
             $dataSave += [
                 "web_user_id" => $web_usuarios->_id,
