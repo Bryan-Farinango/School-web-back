@@ -1590,6 +1590,7 @@ class ApiAdminController extends Controller
         $dataSave += [
             "email" => $email,
             "name" => $name,
+            "rol" => "mobil_user"
         ];
 
 
