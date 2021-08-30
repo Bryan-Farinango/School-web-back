@@ -1624,13 +1624,15 @@ class ApiAdminController extends Controller
                 $arr += [
                   "usuario_id" => $userMobile->web_user_id,
                   "user_web" => true,
-                  "email" => $userMobile->email
+                  "email" => $userMobile->email,
+                   "rol" => $userMobile->rol
                 ];
             }else{
                 $arr += [
                     "usuario_id" => '',
                     "user_web" => true,
-                    "email" => $userMobile->email
+                    "email" => $userMobile->email,
+                    "rol" => $userMobile->rol
                 ];
             }
         }
