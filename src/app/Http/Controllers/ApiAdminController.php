@@ -1666,6 +1666,8 @@ class ApiAdminController extends Controller
                                     "transportista_id" => $r['transportista_id']
                                 ];
                             }
+                        }else{
+                            $arrayRuta = [];
                         }
                     }
                 }
