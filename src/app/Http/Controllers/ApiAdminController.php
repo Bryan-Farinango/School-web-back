@@ -1721,11 +1721,54 @@ class ApiAdminController extends Controller
 
     public function getPublish(Request $request){
         $ruta_id = $request->input('ruta_id');
+        $dataMatch = array();
 
+        if ($ruta_id != 'todos'){
+            $dataMatch += [
+                "ruta_id" => $ruta_id
+            ];
+        }
         $newArr = array();
-        $comunicados = Comunicado::where('ruta_id', $ruta_id)->get();
+        $comunicados = Comunicado::where($dataMatch)->get();
+        foreach ($comunicados as $com){
+            $arrayComunicados = array();
+            if (isset($com['emisor_email'])){
+                $usuario = Usuario::where('email', $com['emisor_email'])->get()->first();
+                if ($usuario != null){
+                    $arrayComunicados += [
+                        "nombres_emisor" => $usuario->nombres,
+                        "apellidos_emisor" => $usuario->apellidos,
+                        "rol" => 'mobil_user'
+                    ];
+                }
+            }else{
+                $transportista = Driver::where('transportista_email',$com['transportista_email'])->get()->first();
+                if ($transportista != null){
+                    $arrayComunicados += [
+                        "nombres_emisor" => $transportista->nombres,
+                        "apellidos_emisor" => $transportista->apellidos,
+                        "rol" => 'transportista'
+                    ];
+                }
+            }
 
+            $arrayComunicados += [
+                "comunicado_titulo" => $com['titulo'],
+                "comunicado_asunto" => $com['asunto'],
+                "comunicado_mensaje" => $com['mensaje'],
+                "comunicado_fecha" => $com['fecha'],
+            ];
 
+            array_push($newArr, $arrayComunicados);
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'consulta correcta',
+                'comunicados' => $newArr
+            ]
+        );
 
 
     }
