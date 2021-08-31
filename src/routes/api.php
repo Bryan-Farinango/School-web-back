@@ -85,6 +85,7 @@ Route::post('get-ruta-mobile', 'ApiAdminController@getRutasMobile');
 Route::post('publicar-comunicado', 'ApiAdminController@publishComunicado');
 Route::post('get-comunicados', 'ApiAdminController@getPublish');
 Route::post('get-ruta-mobile-transporte', 'ApiAdminController@getRutasTransporte');
+Route::post('del-comunicados', 'ApiAdminController@delComunicados');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

@@ -1857,4 +1857,17 @@ class ApiAdminController extends Controller
             ]
         );
     }
+
+    public function delComunicados(Request $request){
+        $email = $request->input('email');
+
+        $comunicados = Comunicado::all();
+        $comunicados->delete();
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Eliminación Correcta'
+            ]
+        );
+    }
 }
