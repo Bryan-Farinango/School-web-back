@@ -1699,9 +1699,14 @@ class ApiAdminController extends Controller
             "titulo" => $titulo,
             "asunto" => $asunto,
             "mensaje" => $mensaje,
-            "fecha" => $fecha,
-            "emisor_email" => $emisorEmail
+            "fecha" => $fecha
         ];
+
+        if (isset($emisorEmail)){
+            $dataCrear += [
+                "emisor_email" => $emisorEmail
+            ];
+        }
 
         if (isset($transportista)){
             $dataCrear += [
