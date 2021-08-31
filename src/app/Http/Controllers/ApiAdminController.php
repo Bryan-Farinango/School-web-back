@@ -1718,4 +1718,15 @@ class ApiAdminController extends Controller
             ]
         );
     }
+
+    public function getPublish(Request $request){
+        $ruta_id = $request->input('ruta_id');
+
+        $newArr = array();
+        $comunicados = Comunicado::where('ruta_id', $ruta_id)->get();
+
+
+
+
+    }
 }

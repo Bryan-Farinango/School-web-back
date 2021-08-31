@@ -30,7 +30,7 @@ class Comunicado extends Model
         'fecha',
         'ruta_id',
         'transportista_email',
-        'emisor_emai'
+        'emisor_email'
     ];
 
 
