@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comunicado;
 use App\Models\Driver;
 use App\Models\Enums\AccionProcesoEnum;
 use App\Models\Enums\EstadoFirmaEnum;
@@ -1613,7 +1614,7 @@ class ApiAdminController extends Controller
             ]
         );
     }
-
+    //mobile-user
     public function loginUserMobile(Request $request){
         $email = $request->input('email');
 
@@ -1679,6 +1680,31 @@ class ApiAdminController extends Controller
                 'resultado' => true,
                 'mensaje' => 'Consulta Correcta',
                 'objeto' => $newArr
+            ]
+        );
+    }
+    public function publishComunicado(Request $request){
+        $ruta_id = $request->input('ruta_id');
+        $titulo = $request->input('titulo');
+        $asunto = $request->input('asunto');
+        $mensaje = $request->input('mensaje');
+        $fecha = $request->input('fecha');
+
+        $dataCrear = array();
+        $dataCrear += [
+            "ruta_id" => $ruta_id,
+            "titulo" => $titulo,
+            "asunto" => $asunto,
+            "mensaje" => $mensaje,
+            "fecha" => $fecha
+        ];
+
+        $comunicado = Comunicado::create($dataCrear);
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Publicación creada'
             ]
         );
     }
