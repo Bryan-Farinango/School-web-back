@@ -1653,6 +1653,7 @@ class ApiAdminController extends Controller
 
         if ($request != null){
             foreach ($rutas as $r){
+                $arrayRuta = array();
                 foreach ($r['matriculas'] as $r2){
                     $estudiante = Student::find($r2['estudiante_id']);
                     if ($estudiante != null){
