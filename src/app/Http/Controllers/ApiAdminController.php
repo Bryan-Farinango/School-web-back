@@ -1645,4 +1645,40 @@ class ApiAdminController extends Controller
             ]
         );
     }
+    public function getRutasMobile(Request $request){
+        $email = $request->input('email');
+
+        $newArr = array();
+        $rutas = Ruta::where('estado', 1)->get();
+
+        if ($request != null){
+            foreach ($rutas as $r){
+                foreach ($r['matriculas'] as $r2){
+                    $estudiante = Student::find($r2['estudiante_id']);
+                    if ($estudiante != null){
+                        $usuario = Usuario::find($estudiante->usuario_id);
+                        if ($usuario != null){
+                            if ($usuario->email == $email){
+                                $arrayRuta = [
+                                    "ruta_id" => $r['_id'],
+                                    "titulo_ruta" => $r['titulo_ruta'],
+                                    "numero_ruta" => $r['numero_ruta'],
+                                    "transportista_id" => $r['transportista_id']
+                                ];
+                            }
+                        }
+                    }
+                }
+                array_push($newArr, $arrayRuta);
+            }
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Consulta Correcta',
+                'objeto' => $newArr
+            ]
+        );
+    }
 }
