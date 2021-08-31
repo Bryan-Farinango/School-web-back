@@ -1862,7 +1862,10 @@ class ApiAdminController extends Controller
         $email = $request->input('email');
 
         $comunicados = Comunicado::all();
-        $comunicados->delete();
+        foreach ($comunicados as $c){
+            $c->delete();
+        }
+
         return response()->json(
             [
                 'resultado' => true,
