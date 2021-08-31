@@ -1736,7 +1736,7 @@ class ApiAdminController extends Controller
         $newArr = array();
 
         if ($ruta_id != 'todos'){
-            $comunicados = Comunicado::where($dataMatch)->get();
+            $comunicados = Comunicado::where($dataMatch)->get()->orderBy('desc');
             foreach ($comunicados as $com){
                 $arrayComunicados = array();
                 if (isset($com['emisor_email'])){
