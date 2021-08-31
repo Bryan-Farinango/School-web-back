@@ -1749,7 +1749,7 @@ class ApiAdminController extends Controller
                         ];
                     }
                 }else{
-                    $transportista = Driver::where('transportista_email',$com['transportista_email'])->get()->first();
+                    $transportista = Driver::where('email',$com['transportista_email'])->get()->first();
                     if ($transportista != null){
                         $arrayComunicados += [
                             "nombres_emisor" => $transportista->nombres,
