@@ -28,7 +28,8 @@ class Comunicado extends Model
         'asunto',
         'mensaje',
         'fecha',
-        'ruta_id'
+        'ruta_id',
+        'transportista_email'
     ];
 
 

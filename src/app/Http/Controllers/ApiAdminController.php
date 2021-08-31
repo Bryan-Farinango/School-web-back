@@ -1689,6 +1689,9 @@ class ApiAdminController extends Controller
         $asunto = $request->input('asunto');
         $mensaje = $request->input('mensaje');
         $fecha = $request->input('fecha');
+        $transportista = $request->input('transportista_email');
+
+
 
         $dataCrear = array();
         $dataCrear += [
@@ -1698,6 +1701,12 @@ class ApiAdminController extends Controller
             "mensaje" => $mensaje,
             "fecha" => $fecha
         ];
+
+        if (isset($transportista)){
+            $dataCrear += [
+                "transportista_email" => $transportista
+            ];
+        }
 
         $comunicado = Comunicado::create($dataCrear);
 
