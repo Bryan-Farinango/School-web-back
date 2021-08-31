@@ -1652,7 +1652,7 @@ class ApiAdminController extends Controller
         $newArr = array();
         $rutas = Ruta::where('estado', 1)->get();
 
-        if ($request != null){
+        if ($rutas != null){
             foreach ($rutas as $r){
                 $arrayRuta = array();
                 foreach ($r['matriculas'] as $r2){
@@ -1814,5 +1814,44 @@ class ApiAdminController extends Controller
         );
 
 
+    }
+
+    public function getRutasTransporte(Request $request){
+        $email = $request->input('email');
+        $transportista_id = '';
+        $drivers = Driver::where('email', $email)->get()->first();
+        if ($drivers != null){
+            $transportista_id = $drivers->_id;
+        }
+
+        $dataMatch = array();
+        $dataMatch += [
+            "estado" => 1,
+            "transportista_id" => $transportista_id
+        ];
+
+        $newArr = array();
+        $rutas = Ruta::where($dataMatch)->get();
+
+        if ($rutas != null){
+            foreach ($rutas as $r){
+                $arrayRuta = array();
+                $arrayRuta = [
+                    "ruta_id" => $r['_id'],
+                    "titulo_ruta" => $r['titulo_ruta'],
+                    "numero_ruta" => $r['numero_ruta'],
+                    "transportista_id" => $r['transportista_id']
+                ];
+                array_push($newArr, $arrayRuta);
+            }
+        }
+
+        return response()->json(
+            [
+                'resultado' => true,
+                'mensaje' => 'Consulta Correcta',
+                'objeto' => $newArr
+            ]
+        );
     }
 }
