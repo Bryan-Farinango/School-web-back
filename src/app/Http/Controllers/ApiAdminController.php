@@ -1729,38 +1729,76 @@ class ApiAdminController extends Controller
             ];
         }
         $newArr = array();
-        $comunicados = Comunicado::where($dataMatch)->get();
-        foreach ($comunicados as $com){
-            $arrayComunicados = array();
-            if (isset($com['emisor_email'])){
-                $usuario = Usuario::where('email', $com['emisor_email'])->get()->first();
-                if ($usuario != null){
-                    $arrayComunicados += [
-                        "nombres_emisor" => $usuario->nombres,
-                        "apellidos_emisor" => $usuario->apellidos,
-                        "rol" => 'mobil_user'
-                    ];
+
+        if ($ruta_id != 'todos'){
+            $comunicados = Comunicado::where($dataMatch)->get();
+            foreach ($comunicados as $com){
+                $arrayComunicados = array();
+                if (isset($com['emisor_email'])){
+                    $usuario = Usuario::where('email', $com['emisor_email'])->get()->first();
+                    if ($usuario != null){
+                        $arrayComunicados += [
+                            "nombres_emisor" => $usuario->nombres,
+                            "apellidos_emisor" => $usuario->apellidos,
+                            "rol" => 'mobil_user'
+                        ];
+                    }
+                }else{
+                    $transportista = Driver::where('transportista_email',$com['transportista_email'])->get()->first();
+                    if ($transportista != null){
+                        $arrayComunicados += [
+                            "nombres_emisor" => $transportista->nombres,
+                            "apellidos_emisor" => $transportista->apellidos,
+                            "rol" => 'transportista'
+                        ];
+                    }
                 }
-            }else{
-                $transportista = Driver::where('transportista_email',$com['transportista_email'])->get()->first();
-                if ($transportista != null){
-                    $arrayComunicados += [
-                        "nombres_emisor" => $transportista->nombres,
-                        "apellidos_emisor" => $transportista->apellidos,
-                        "rol" => 'transportista'
-                    ];
-                }
+
+                $arrayComunicados += [
+                    "comunicado_titulo" => $com['titulo'],
+                    "comunicado_asunto" => $com['asunto'],
+                    "comunicado_mensaje" => $com['mensaje'],
+                    "comunicado_fecha" => $com['fecha'],
+                ];
+
+                array_push($newArr, $arrayComunicados);
             }
+        }else{
+            $comunicados = Comunicado::all();
 
-            $arrayComunicados += [
-                "comunicado_titulo" => $com['titulo'],
-                "comunicado_asunto" => $com['asunto'],
-                "comunicado_mensaje" => $com['mensaje'],
-                "comunicado_fecha" => $com['fecha'],
-            ];
+            foreach ($comunicados as $com){
+                $arrayComunicados = array();
+                if (isset($com['emisor_email'])){
+                    $usuario = Usuario::where('email', $com['emisor_email'])->get()->first();
+                    if ($usuario != null){
+                        $arrayComunicados += [
+                            "nombres_emisor" => $usuario->nombres,
+                            "apellidos_emisor" => $usuario->apellidos,
+                            "rol" => 'mobil_user'
+                        ];
+                    }
+                }else{
+                    $transportista = Driver::where('transportista_email',$com['transportista_email'])->get()->first();
+                    if ($transportista != null){
+                        $arrayComunicados += [
+                            "nombres_emisor" => $transportista->nombres,
+                            "apellidos_emisor" => $transportista->apellidos,
+                            "rol" => 'transportista'
+                        ];
+                    }
+                }
 
-            array_push($newArr, $arrayComunicados);
+                $arrayComunicados += [
+                    "comunicado_titulo" => $com['titulo'],
+                    "comunicado_asunto" => $com['asunto'],
+                    "comunicado_mensaje" => $com['mensaje'],
+                    "comunicado_fecha" => $com['fecha'],
+                ];
+
+                array_push($newArr, $arrayComunicados);
+            }
         }
+
 
         return response()->json(
             [
