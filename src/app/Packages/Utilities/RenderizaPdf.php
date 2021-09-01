@@ -13,7 +13,7 @@ use SimpleXMLElement;
 /**
  * Utilidad para renderizar los RIDES, segun el tipo de documento
  *
- * @package stupendo-renderizapdf
+ * @package -renderizapdf
  * @author Julio Hernandez
  */
 class RenderizaPdf
