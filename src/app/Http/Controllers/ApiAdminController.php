@@ -1858,6 +1858,7 @@ class ApiAdminController extends Controller
         );
     }
 
+
     public function delComunicados(Request $request){
         $email = $request->input('email');
 
