@@ -50,3 +50,5 @@ El proyecto School web back cumple con la funcionalidad de conexión a base de d
 ## Proyecto levantado en servidor con docker
 ![image](https://user-images.githubusercontent.com/38628690/131645725-f3ea4026-f939-4d47-8ddc-d2b5c5169b5b.png)
 
+## Ejemplo de petición por back-end postman
+![image](https://user-images.githubusercontent.com/38628690/131645931-da6cb42f-b3a4-40ee-9be8-7c58d67b7d01.png)
