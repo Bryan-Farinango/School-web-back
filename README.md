@@ -47,3 +47,6 @@ El proyecto School web back cumple con la funcionalidad de conexión a base de d
 ### Parte de las rutas publicadas mediante APIs
 ![image](https://user-images.githubusercontent.com/38628690/131645407-3ad98283-b2e9-432a-9742-0c3810d38e37.png)
 
+## Proyecto levantado en servidor con docker
+![image](https://user-images.githubusercontent.com/38628690/131645725-f3ea4026-f939-4d47-8ddc-d2b5c5169b5b.png)
+
