@@ -2,7 +2,7 @@
 ## Centro de Desarrollo Infantil Descubrir 🚀
 El proyecto School-web-back contiene la lógica de desarrollo de [School-web-front-end](https://github.com/Bryan-Farinango/School-web) mediante APIS RESTFULL desarrollado en PHP Laravel 8 con **Docker** y conexión a Mongo DB. 
 ### **Video demostrativo**
-* enlace_youtube
+* [Manual usuario video YouTube](https://www.youtube.com/watch?v=ZHiUGJxOSGo)
 ## Desarrollado por ✒️
 * **Bryan Farinango** - [Bryan-Farinango](https://gist.github.com/Bryan-Farinango)
 * **Josselyn Vela** - [JosselynVela](https://github.com/JosselynVela)
