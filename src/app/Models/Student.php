@@ -35,7 +35,8 @@ class Student extends Model
         'jornada',
         'usuario_id',
         'estado',
-        'transporte'
+        'transporte',
+        'motivo'
     ];
 
     /*

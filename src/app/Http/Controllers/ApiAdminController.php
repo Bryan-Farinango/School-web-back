@@ -531,6 +531,7 @@ class ApiAdminController extends Controller
     public function rechazarEstudiante(Request $request){
         $apiKey = $request->input('api_key_admin');
         $estudiante_id = $request->input('estudiante_id');
+        $motivo = $request->input('motivo');
 
         if ( config('app.api_key_admin') != $apiKey){
             return response()->json(
@@ -543,6 +544,7 @@ class ApiAdminController extends Controller
 
         $student = Student::find($estudiante_id);
         $student->estado = 2;
+        $student->motivo = $motivo;
         $student->save();
 
         return response()->json(
