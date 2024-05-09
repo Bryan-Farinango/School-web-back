@@ -34,7 +34,6 @@ class ApiDumpsterController extends Controller
             'comments' => $comments,
             'address' => $ddress,
         ];
-        $dumpsterDB = Dumpster::create($dumpster);
 
         try {
             $dumpsterDB = Dumpster::create($dumpster);
