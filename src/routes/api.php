@@ -91,3 +91,5 @@ Route::post('del-comunicados', 'ApiAdminController@delComunicados');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('api/v1/dumpster/create', 'ApiDumpsterController@addDumpster');
