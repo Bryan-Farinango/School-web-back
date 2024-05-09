@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Storage;
 
 class Dumpster extends Model
 {
-    use HasFactory;
 
     protected $collection = 'dumpster';
 
