@@ -37,6 +37,7 @@ class ApiDumpsterController extends Controller
 
         try {
             $dumpsterDB = Dumpster::create($dumpster);
+            dd($dumpster);
         }catch (Exception $e){
             Log::info($e);
             return response()->json(
