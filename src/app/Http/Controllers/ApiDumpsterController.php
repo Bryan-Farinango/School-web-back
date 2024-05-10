@@ -34,21 +34,21 @@ class ApiDumpsterController extends Controller
             'comments' => $comments,
             'address' => $ddress,
         ];
-        $dumpsterDB = Dumpster::create($dumpster);
 
         try {
+            $dumpsterDB = Dumpster::create($dumpster);
             return response()->json(
                 [
-                    'resultado' => true,
-                    'mensaje' => 'No se pudo crear los datos del contenedor de basura.'
+                    'result' => true,
+                    'message' => 'No se pudo crear los datos del contenedor de basura.'
                 ]
             );
         }catch (Exception $e){
             Log::info($e);
             return response()->json(
                 [
-                    'resultado' => false,
-                    'mensaje' => 'No se pudo crear los datos del contenedor de basura.',
+                    'result' => false,
+                    'message' => 'No se pudo crear los datos del contenedor de basura.',
                     'error' => $e
                 ]
             );
