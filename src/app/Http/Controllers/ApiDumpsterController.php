@@ -39,8 +39,8 @@ class ApiDumpsterController extends Controller
             $dumpsterDB = Dumpster::create($dumpster);
             return response()->json(
                 [
-                    'result' => true,
-                    'message' => 'No se pudo crear los datos del contenedor de basura.'
+                    'resultado' => true,
+                    'mensaje' => 'Información del contenedor creada correctamente.'
                 ]
             );
         }catch (Exception $e){
@@ -53,12 +53,7 @@ class ApiDumpsterController extends Controller
                 ]
             );
         }
-        return response()->json(
-            [
-                'resultado' => true,
-                'mensaje' => 'Información del contenedor creada correctamente.'
-            ]
-        );
+
 
     }
 }
