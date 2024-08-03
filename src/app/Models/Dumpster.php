@@ -23,13 +23,15 @@ class Dumpster extends Model
     protected $collection = 'dumpster';
 
     protected $fillable = [
-        'name',
-        'lastname',
-        'bintype',
-        'binsize',
+        'address',
+        'anonymous',
+        'residency_status',
+        'country',
+        'bintypetrash',
         'bincondition',
         'comments',
-        'address'
+        'binsize',
+        'email'
     ];
 
 

@@ -17,22 +17,39 @@ class ApiDumpsterController extends Controller
 {
     public function addDumpster(Request $request)
     {
-        $name = $request->input('name');
-        $lastname = $request->input('lastname');
-        $bintype = $request->input('bintype');
-        $binsize = $request->input('binsize');
+        $address = $request->input('address');
+        $anonymous = $request->input('anonymous');
+        $resident = $request->input('resident');
+        $country = $request->input('country');
+        $bintypetrash = $request->input('bintypetrash');
         $bincondition = $request->input('bincondition');
         $comments = $request->input('comments');
-        $ddress = $request->input('address');
+        $binsize = $request->input('binsize');
+        $email = $request->input('email');
+
+        if ($resident == true)
+        {
+            $residentLabel = 'Residente';
+        }else{
+            $residentLabel = 'Turista';
+        }
+
+        if ($bincondition == true){
+            $binconditionLabel = 'Dañado';
+        }else{
+            $binconditionLabel = 'Buena condición';
+        }
 
         $dumpster = [
-            'name' => $name,
-            'lastname' => $lastname,
-            'bintype' => $bintype,
-            'binsize' => $binsize,
-            'bincondition' => $bincondition,
+            'address' => $address,
+            'anonymous' => $anonymous,
+            'residency_status' => $residentLabel,
+            'country' => $country,
+            'bintypetrash' => $bintypetrash,
+            'bincondition' => $binconditionLabel,
             'comments' => $comments,
-            'address' => $ddress,
+            'binsize' => $binsize,
+            'email' => $email
         ];
 
         try {
@@ -40,7 +57,8 @@ class ApiDumpsterController extends Controller
             return response()->json(
                 [
                     'resultado' => true,
-                    'mensaje' => 'Información del contenedor creada correctamente.'
+                    'mensaje' => 'Información del contenedor creada correctamente.',
+                    'object' => $dumpsterDB
                 ]
             );
         }catch (Exception $e){
