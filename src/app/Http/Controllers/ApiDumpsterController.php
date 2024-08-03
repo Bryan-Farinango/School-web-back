@@ -61,7 +61,7 @@ class ApiDumpsterController extends Controller
                     'object' => $dumpsterDB
                 ]
             );
-        }catch (Exception $e){
+        }catch (\Exception $e){
             Log::info($e);
             return response()->json(
                 [
