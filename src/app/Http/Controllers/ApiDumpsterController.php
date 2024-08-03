@@ -29,15 +29,15 @@ class ApiDumpsterController extends Controller
 
         if ($resident == true)
         {
-            $residentLabel = 'Residente';
+            $residentLabel = 'resident';
         }else{
-            $residentLabel = 'Turista';
+            $residentLabel = 'tourist';
         }
 
         if ($bincondition == true){
-            $binconditionLabel = 'Dañado';
+            $binconditionLabel = 'damaged';
         }else{
-            $binconditionLabel = 'Buena condición';
+            $binconditionLabel = 'good condition';
         }
 
         $dumpster = [
